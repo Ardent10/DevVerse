@@ -1,0 +1,77 @@
+{
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  },
+  "editor.wordWrap": "off",
+  "diffEditor.wordWrap": "off",
+  "editor.renderWhitespace": "all",
+  "editor.showFoldingControls": "mouseover",
+  "editor.fontSize": 15,
+  "editor.linkedEditing": true,
+  "editor.scrollBeyondLastLine": true,
+  "window.title": "${activeEditorFull}${separator}${rootName}",
+  "workbench.editor.tabCloseButton": "on",
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnPaste": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.snippetSuggestions": "top",
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.confirmDelete": false,
+  // "editor.rulers": [80, 120],
+  "gitlens.codeLens.enabled": false,
+  "gitlens.defaultDateShortFormat": null,
+  "vscode-edge-devtools.autoAttachViaDebuggerForEdge": false,
+  "gitlens.advanced.abbreviatedShaLength": 8,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": false,
+  "editor.suggest.preview": true,
+  "vscode-edge-devtools.mirrorEdits": true,
+  "bookmarks.navigateThroughAllFiles": false,
+  "git.autofetch": true,
+  "explorer.confirmDragAndDrop": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "svg.preview.mode": "svg",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "highlight-matching-tag.styles": {
+    "opening": {
+      "name": {
+        "highlight": "#ffd700aa"
+      }
+    },
+    "closing": {
+      "name": {
+        "highlight": "#ffd700aa"
+      }
+    }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "xml.server.binary.trustedHashes": [
+    "45b983fc457254ae24af4b5faa88b00faa8ff8ea9b74e2e82f188232df2e7628"
+  ],
+  "material-ui-snippets.showNotesOnStartup": false,
+  "terminal.integrated.fontSize": 14,
+  "workbench.colorTheme": "Default Dark+"
+}

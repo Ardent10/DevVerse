@@ -1,0 +1,31 @@
+{
+  "name": "codelabz-v2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.11",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
+    "@mui/styles": "^5.11.9",
+    "@next/font": "13.1.6",
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.5",
+    "typescript": "4.9.5",
+    "yup": "^1.0.2"
+  }
+}
