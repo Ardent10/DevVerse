@@ -85,7 +85,9 @@ export function Layout(props: props) {
           display="flex"
           justifyContent="space-between!important"
         >
-          <Image src="/scorelab.jpeg" width={120} height={50} alt="scorelab" />
+          Your Developer's Social
+          {/* <Image src="/sidebar.jpg" width={120} height={50} alt="scorelab" /> */}
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -95,7 +97,7 @@ export function Layout(props: props) {
           </IconButton>
         </DrawerHeader>
 
-        <Sidebar open={open} menuItems={props.menuItems} />
+        <Sidebar open={open} menuItems={props?.menuItems} />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1 }}>
         {props.children}

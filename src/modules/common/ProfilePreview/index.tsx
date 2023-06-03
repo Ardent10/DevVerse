@@ -79,12 +79,12 @@ export const ProfilePreview = () => {
   return (
     <BasicCard
       px={2}
-      cardMediaheight={80}
+      cardMediaheight={100}
       cardMedia={sampleUserData?.bgImg}
       position="relative"
     >
       <Grid container>
-        <Grid item height={50} position="absolute" top={50} left={75}>
+        <Grid item height={50} position="absolute" top={70} left={110}>
           <Avatar
             alt="profile-icon"
             src={sampleUserData?.avatar}
@@ -183,7 +183,7 @@ export const ProfilePreview = () => {
           </form>
         ) : (
           <>
-            <Grid item xs={12} mt={3}>
+            <Grid item xs={12} mt={2}>
               <Typography textAlign="center" fontSize={14} fontWeight={500}>
                 {sampleUserData?.name}
               </Typography>

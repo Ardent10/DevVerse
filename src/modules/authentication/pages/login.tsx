@@ -1,6 +1,6 @@
 import { Input } from "@common/Form/InputField";
 import {PrimaryButton} from "@common/PrimaryButton";
-import { LoginSchema } from "@/Utils/validations";
+import { LoginSchema } from "@/utils/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Box,
@@ -16,7 +16,7 @@ import { Controller, useForm } from "react-hook-form";
 
 export function LoginScreen() {
   const defaultValues = {
-    email: "codelabz@scorelab.com",
+    email: "developer@devverse.com",
     password: "Test@123",
     remember: true,
   };
@@ -48,7 +48,7 @@ export function LoginScreen() {
           <Grid item display="flex" justifyContent="start" alignItems="center">
             <Link href="/" style={{ textDecoration: "none" }}>
               <Box display="flex" justifyContent="start" alignItems="center">
-                <Image src="/logo2.png" height={80} width={75} alt="CodeLabz" />
+                <Image src="/logo2.png" height={80} width={75} alt="DevVersebz" />
                 <Typography fontSize={22} fontWeight={500} color="#8a89fa">
                   Labz.
                 </Typography>
@@ -66,7 +66,7 @@ export function LoginScreen() {
                   src="/scorelab.jpeg"
                   height={60}
                   width={100}
-                  alt="CodeLabz"
+                  alt="DevVersebz"
                 />
               </Box>
             </Link>
@@ -205,7 +205,7 @@ export function LoginScreen() {
               style={{ textDecoration: "none", color: "#8a89fa" }}
               href="https://code-labz-v2.vercel.app/"
             >
-              CodeLabz
+              DevVersebz
             </Link>
             {" By "}
             <Link

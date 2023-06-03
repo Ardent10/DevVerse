@@ -19,23 +19,29 @@ interface props {
   borderRadius?: string;
   borderNoBgColor?: boolean;
   borderColor?: string;
-	link?: string;
+  link?: string;
+  textTransform?: string;
+  hoverColor?: string;
+  fontWeight?: number;
 }
 
 export function PrimaryButton(props: props) {
 	const theme = useTheme();
 	const sxStylesprops = {
-		width: props.width,
-		height: props.height,
-		padding: props.padding,
-		fontSize: props.fontSize,
-		backgroundColor: props.backgroundColor,
-		color: props.color,
-		borderRadius: props.borderRadius,
-		borderNoBgColor:props.borderNoBgColor,
-		borderColor:props.borderColor,
-		theme: theme,
-	};
+    width: props.width,
+    height: props.height,
+    padding: props.padding,
+    fontSize: props.fontSize,
+    backgroundColor: props.backgroundColor,
+    color: props.color,
+    borderRadius: props.borderRadius,
+    borderNoBgColor: props.borderNoBgColor,
+    borderColor: props.borderColor,
+    textTransform: props.textTransform,
+    hoverColor: props.hoverColor,
+    fontWeight: props.fontWeight,
+    theme: theme,
+  };
 	const styles = sxStyles(sxStylesprops);
 	return (
 		<Button

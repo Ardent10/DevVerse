@@ -1,11 +1,12 @@
-import { PrimaryButton, SearchBar} from "@common/index";
+import { PrimaryButton, SearchBar } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, IconButton, Toolbar, Typography } from "@mui/material";
+import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import { Box, IconButton, Toolbar } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
-import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { SearchSchema } from "../../../../utils/validations";
@@ -70,14 +71,11 @@ export default function Header(props: props) {
                 ...(props.open && { display: "none" }),
               }}
             >
-              <MenuIcon sx={{ color: "#8a89fa" }} />
+              <MenuIcon sx={{ color: "#8a89fa" }} fontSize="large" />
             </IconButton>
             <Link href="/" style={{ textDecoration: "none" }}>
               <Box display="flex" justifyContent="start" alignItems="center">
-                <Image src="/logo2.png" height={80} width={75} alt="CodeLabz" />
-                <Typography fontSize={22} fontWeight={500} color="#8a89fa">
-                  Labz.
-                </Typography>
+                <img src="/DevVerse1.jpg" height={50} alt="DevVerse" />
               </Box>
             </Link>
           </Box>
@@ -101,21 +99,20 @@ export default function Header(props: props) {
             alignItems="center"
             width={230}
           >
+            <IconButton>
+              <WbSunnyRoundedIcon sx={{ color: "#8a89fa" }} />
+            </IconButton>
+            <IconButton>
+              <BedtimeIcon sx={{ color: "#8a89fa" }} />
+            </IconButton>
+
             <PrimaryButton
               title="Login"
               type="button"
               backgroundColor="#8a89fa"
               fontSize={12}
+              fontWeight={400}
               link="/"
-            />
-            <PrimaryButton
-              fontSize={12}
-              title="Sign Up"
-              type="button"
-              borderNoBgColor={true}
-              borderColor="1px solid #8a89fa"
-              color="#8a89fa"
-              link="/signup"
             />
             <ProfileMenu />
           </Box>

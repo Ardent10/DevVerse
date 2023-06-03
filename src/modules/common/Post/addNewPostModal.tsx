@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { NewCodeLabzPostSchema } from "../../../utils/validations";
+import { NewPostSchema } from "../../../utils/validations";
 import { Input, InputHeading, TextAreaInput } from "../Form";
 import { PrimaryButton } from "../PrimaryButton";
 
@@ -13,7 +13,7 @@ interface props {
 
 export default function AddNewPostModal(props: props) {
   const { handleSubmit, control, reset } = useForm({
-    resolver: yupResolver(NewCodeLabzPostSchema),
+    resolver: yupResolver(NewPostSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
@@ -30,13 +30,14 @@ export default function AddNewPostModal(props: props) {
             flexDirection: "column",
           }}
         >
-          <Box bgcolor="#8a89fa" borderRadius="12px 12px 0 0">
+          <Box borderRadius="12px 12px 0 0">
             <Box
               p={2}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
             >
+              <PostAddIcon fontSize="large" sx={{ color: "#8a89fa" }} />
               <Typography
                 display="flex"
                 justifyContent="center"
@@ -44,14 +45,16 @@ export default function AddNewPostModal(props: props) {
                 component="h1"
                 variant="h5"
                 fontSize={22}
-                fontWeight={700}
-                color="#FFFF"
+                fontWeight={500}
+                color="#8a89fa"
               >
-                <PostAddIcon fontSize="large" />
-                New CodeLabz Post
+                New Post
               </Typography>
-              <IconButton onClick={props.CloseModal} sx={{ color: "#FFF" }}>
-                <CloseIcon fontSize="medium" />
+              <IconButton onClick={props.CloseModal}>
+                <CloseIcon
+                  fontSize="large"
+                  sx={{ color: "#8a89fa" }}
+                />
               </IconButton>
             </Box>
           </Box>

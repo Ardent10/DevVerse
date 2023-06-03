@@ -35,11 +35,7 @@ const menuItems = [
     icon: <BookmarkIcon />,
   },
   {
-    title: "Tutorials",
-    icon: <MenuBookIcon />,
-  },
-  {
-    title: "My Feeds",
+    title: "Events",
     icon: <WhatshotIcon />,
   },
   {
@@ -50,25 +46,17 @@ const menuItems = [
     title: "User Settings",
     icon: <ManageAccountsIcon />,
   },
-  {
-    title: "Organization Settings",
-    icon: <AdminPanelSettingsIcon />,
-  },
-  {
-    title: "Organizations",
-    icon: <SupervisorAccountIcon />,
-  },
 ];
 
 const HomeScreen: NextPage = () => {
   return (
     <Layout menuItems={menuItems}>
-      <Grid container bgcolor="#f7f7f7" pt={12}>
-        <Grid item xs={2}>
+      <Grid container bgcolor="#f7f7f7" pt={10}>
+        <Grid item xs={2.5}>
           <ProfilePreview />
         </Grid>
 
-        <Grid item xs={7}>
+        <Grid item xs={6.5}>
           <AddPost />
           <Post postData={postData} />
         </Grid>
@@ -108,18 +96,11 @@ const HomeScreen: NextPage = () => {
                 {"Copyright © "}
                 <Link
                   style={{ textDecoration: "none", color: "#8a89fa" }}
-                  href="https://code-labz-v2.vercel.app/"
+                  href="/"
                 >
-                  CodeLabz
+                  DevVerse &nbsp;
                 </Link>
-                {" By "}
-                <Link
-                  style={{ textDecoration: "none", color: "#8a89fa" }}
-                  href="https://scorelab.org/"
-                >
-                  SCoRe Lab.
-                </Link>{" "}
-                {new Date().getFullYear()}.
+                { new Date().getFullYear()}.
               </Typography>
             </Grid>
           </Grid>

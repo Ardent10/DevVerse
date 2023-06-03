@@ -5,7 +5,6 @@ import {Error} from "../Error";
 
 const TextArea = styled(TextareaAutosize)(() => ({
   width: "100%",
-  fontFamily: "Roboto",
   padding: 10,
   borderRadius: "8px",
   "&:disabled": {

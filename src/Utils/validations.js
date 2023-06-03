@@ -10,7 +10,7 @@ const SearchSchema = yup.object().shape({
   Search: yup.string().required(Messages.Search.required),
 });
 
-const NewCodeLabzPostSchema = yup.object().shape({
+const NewPostSchema = yup.object().shape({
   title: yup.string().required(Messages.title.required),
   description: yup.string().required(Messages.description.required),
 });
@@ -26,6 +26,6 @@ const EditProfilePreviewUserSchema = yup.object().shape({
 export {
   LoginSchema,
   SearchSchema,
-  NewCodeLabzPostSchema,
+  NewPostSchema,
   EditProfilePreviewUserSchema,
 };

@@ -31,7 +31,7 @@ const Footer = () => {
       <Grid item xs={12} sx={styles.gridItemStyle}>
         <Link href="/" style={styles.linkStyle}>
           <Box display="flex" justifyContent="start" alignItems="center">
-            <Image src="/logo2.png" height={80} width={75} alt="CodeLabz" />
+            <Image src="/logo2.png" height={80} width={75} alt="DevVerse" />
             <Typography fontSize={22} fontWeight={500} color="#8a89fa">
               Labz.
             </Typography>
@@ -46,7 +46,7 @@ const Footer = () => {
               src="/scorelab.jpeg"
               height={60}
               width={100}
-              alt="CodeLabz"
+              alt="DevVerse"
             />
           </Box>
         </Link>
@@ -71,7 +71,7 @@ const Footer = () => {
         <Link href="https://scorelab.org/">
           <LanguageIcon />
         </Link>
-        <Link href="https://github.com/scorelab/Codelabz">
+        <Link href="https://github.com/scorelab/DevVerse">
           <GitHubIcon />
         </Link>
       </Grid>
@@ -82,7 +82,7 @@ const Footer = () => {
             style={styles.footerLinkStyle}
             href="https://code-labz-v2.vercel.app/"
           >
-            CodeLabz
+            DevVerse
           </Link>
           {" By "}
           <Link style={styles.footerLinkStyle} href="https://scorelab.org/">

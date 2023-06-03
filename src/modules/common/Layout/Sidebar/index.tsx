@@ -20,7 +20,7 @@ export default function Sidebar(props: props) {
   const styles = sxStyles({ open: props.open });
 
   return (
-    <List sx={{ pt: 2.5 }}>
+    <List sx={{ pt: 2 }}>
       {props.menuItems.map((item, index) => (
         <ListItem key={index} disablePadding sx={{ display: "block" }}>
           <CustomTooltip placement="right" label={item.title}>
@@ -36,7 +36,7 @@ export default function Sidebar(props: props) {
             </ListItemButton>
           </CustomTooltip>
 
-          {index === 5 && <Divider />}
+          {index === 3 && <Divider />}
         </ListItem>
       ))}
     </List>
