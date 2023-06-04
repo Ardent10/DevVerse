@@ -54,8 +54,8 @@ export function Post({ postData }: props) {
   return (
     <>
       {postData?.map((post, idx) => (
-        <Grid container px={4} py={2}>
-          <Card key={idx} sx={{ minWidth: "100%" }}>
+        <Grid key={idx} container px={4} py={2}>
+          <Card sx={{ minWidth: "100%" }}>
             <CardHeader
               avatar={
                 <Avatar

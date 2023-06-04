@@ -1,3 +1,4 @@
+import { useAuth } from "@/modules/authentication/hooks";
 import {
   chipsArray,
   eventsArray,
@@ -6,17 +7,16 @@ import {
 import AddPost from "@common/Post/addPost";
 import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Avatar, Badge, Box, Grid, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useEffect } from "react";
+
 const menuItems = [
   {
     title: "Home",
@@ -49,6 +49,14 @@ const menuItems = [
 ];
 
 const HomeScreen: NextPage = () => {
+  const { getAccount } = useAuth();
+
+  useEffect(() => {
+    const fetchAccount = async () => {
+      await getAccount();
+    };
+    fetchAccount();
+  }, []);
   return (
     <Layout menuItems={menuItems}>
       <Grid container bgcolor="#f7f7f7" pt={10}>
@@ -100,7 +108,7 @@ const HomeScreen: NextPage = () => {
                 >
                   DevVerse &nbsp;
                 </Link>
-                { new Date().getFullYear()}.
+                {new Date().getFullYear()}.
               </Typography>
             </Grid>
           </Grid>

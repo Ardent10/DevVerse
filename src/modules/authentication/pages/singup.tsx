@@ -1,3 +1,4 @@
+import { useAppState } from "@/store";
 import { SignupSchema } from "@/utils/validations";
 import { Input } from "@common/Form/InputField";
 import { CustomSnackbar, PrimaryButton } from "@common/index";
@@ -13,8 +14,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useAuth } from "../hooks";
 
 export function SignupScreen() {
+  const { Signup } = useAuth();
+  const [state, dispatch] = useAppState();
   const [openSnackbar, setOpenSnackbar] = useState({
     open: false,
     severity: "error",
@@ -22,7 +26,8 @@ export function SignupScreen() {
   });
 
   const defaultValues = {
-    email: "developer@devverse.com",
+    username: "John Doe",
+    email: "john@devverse.com",
     password: "Test@123",
     confirm_password: "Test@123",
     agree_tnc: true,
@@ -34,13 +39,11 @@ export function SignupScreen() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    alert(JSON.stringify(data));
-    setOpenSnackbar({
-      open: true,
-      severity: "success",
-      message: "Account Created Successfully",
+    await Signup({
+      email: data.email,
+      password: data.password,
+      username: data.username,
     });
-    router.push("/");
   });
 
   const router = useRouter();
@@ -49,7 +52,7 @@ export function SignupScreen() {
     <>
       <CustomSnackbar
         open={openSnackbar.open}
-        severity="success"
+        severity={openSnackbar.severity == "success" ? "success" : "error"}
         message={openSnackbar.message}
         vertical="top"
         horizontal="right"
@@ -109,17 +112,31 @@ export function SignupScreen() {
                 <form onSubmit={onSubmit}>
                   <Grid container rowSpacing={2}>
                     <Grid item xs={12}>
-                      <Grid item xs={12}>
-                        <Input
-                          name="email"
-                          control={control}
-                          type="email"
-                          placeholder="Enter Email*"
-                          disable={false}
-                          inputHeadingType="Bold"
-                          inputHeadingLabel="Email"
-                          required
-                        />
+                      <Grid container columnSpacing={2}>
+                        <Grid item xs={6}>
+                          <Input
+                            name="username"
+                            control={control}
+                            type="text"
+                            placeholder="Enter Username*"
+                            disable={false}
+                            inputHeadingType="Bold"
+                            inputHeadingLabel="Username"
+                            required
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Input
+                            name="email"
+                            control={control}
+                            type="email"
+                            placeholder="Enter Email*"
+                            disable={false}
+                            inputHeadingType="Bold"
+                            inputHeadingLabel="Email"
+                            required
+                          />
+                        </Grid>
                       </Grid>
                     </Grid>
 
@@ -192,11 +209,12 @@ export function SignupScreen() {
                 </form>
                 <Grid item container xs={12} mt={2}>
                   <Grid item xs>
+                    Already have an account? &nbsp;
                     <Link
                       style={{ textDecoration: "none", color: "#8a89fa" }}
                       href="/"
                     >
-                      Already have an account?
+                      Login
                     </Link>
                   </Grid>
                 </Grid>

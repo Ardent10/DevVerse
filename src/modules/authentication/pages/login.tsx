@@ -1,3 +1,4 @@
+import { useAppState } from "@/store";
 import { LoginSchema } from "@/utils/validations";
 import { Input } from "@common/Form/InputField";
 import { CustomSnackbar, PrimaryButton } from "@common/index";
@@ -11,18 +12,17 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useAuth } from "../hooks";
 
 export function LoginScreen() {
-  const [openSnackbar, setOpenSnackbar] = useState({
-    open: false,
-    severity: "error",
-    message: "",
-  });
+  const router = useRouter();
+  const { getAccount, Login } = useAuth();
+  const [state, dispatch] = useAppState();
 
   const defaultValues = {
-    email: "developer@devverse.com",
+    email: "john@devverse.com",
     password: "Test@123",
     remember: true,
   };
@@ -32,24 +32,25 @@ export function LoginScreen() {
     defaultValues: defaultValues,
   });
 
-  const onSubmit = handleSubmit(async (data) => {
-    alert(JSON.stringify(data));
-    setOpenSnackbar({
-      open: true,
-      severity: "success",
-      message: "Account Created Successfully",
-    });
-    router.push("/home");
-  });
+  useEffect(() => {
+    const fetchAccount = async () => {
+      await getAccount();
+    };
+    fetchAccount();
+  }, []);
 
-  const router = useRouter();
+  const onSubmit = handleSubmit(async (data) => {
+    await Login({ email: data.email, password: data.password });
+  });
 
   return (
     <>
       <CustomSnackbar
-        open={openSnackbar.open}
-        severity="success"
-        message={openSnackbar.message}
+        open={state.toggleSnackbar.open}
+        severity={
+          state.toggleSnackbar.severity == "success" ? "success" : "error"
+        }
+        message={state.toggleSnackbar.message}
         vertical="top"
         horizontal="right"
       />
@@ -174,11 +175,12 @@ export function LoginScreen() {
                     </Link>
                   </Grid>
                   <Grid item>
+                    Don't have an account? &nbsp;
                     <Link
                       href="/signup"
                       style={{ textDecoration: "none", color: "#8a89fa" }}
                     >
-                      Don't have an account? Sign Up
+                      Sign Up
                     </Link>
                   </Grid>
                 </Grid>

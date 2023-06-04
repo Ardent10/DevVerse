@@ -11,11 +11,11 @@ function AppStateProvider({ reducer, initialState = initialState, children }) {
 
 AppStateProvider.propTypes = {
   reducer: func,
-  initialState: object,
+  initialState: object.isRequired,
 };
 
-function useAppState() {
+export function useAppState() {
   return useContext(Context);
 }
 
-export { appReducers, initialState, AppStateProvider, useAppState };
+export { appReducers, initialState, AppStateProvider };

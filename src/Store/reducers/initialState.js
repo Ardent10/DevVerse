@@ -1,3 +1,8 @@
 export const initialState = {
-	openCloseSideBar: false,
+  openCloseSideBar: false,
+  toggleSnackbar: {
+    open: false,
+    severity: "error",
+    message: "",
+  },
 };

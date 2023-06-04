@@ -1,4 +1,4 @@
-import { Account, Client, Databases } from "appwrite";
+import { Account, Client, Databases, Graphql } from "appwrite";
 const client = new Client();
 
 client
@@ -7,9 +7,6 @@ client
 
 const account = new Account(client);
 
-const database = new Databases(
-  client,
-  process.env.NEXT_PUBLIC_APPWRITE_DB_ID
-);
+const database = new Databases(client, process.env.NEXT_PUBLIC_APPWRITE_DB_ID);
 
-export {account, database};
+export { account, database };

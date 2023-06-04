@@ -1,16 +1,18 @@
-import Logout from "@mui/icons-material/Logout";
-import PersonAdd from "@mui/icons-material/PersonAdd";
+import { useAuth } from "@/modules/authentication/hooks";
+import { CustomTooltip } from "@common/index";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
+import {
+  Box,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
-import { useRouter } from "next/router";
+import { sxStyles } from "./index.styles";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,12 +24,17 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const router = useRouter();
+  const styles = sxStyles();
+  const { Logout } = useAuth();
+
+  async function handleLogout() {
+    await Logout();
+  }
 
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Account settings">
+      <Box display="flex" alignItems="center" textAlign="center">
+        <CustomTooltip label="Profile Menu" placement="bottom">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -42,7 +49,7 @@ export default function AccountMenu() {
               sx={{ width: 35, height: 35 }}
             />
           </IconButton>
-        </Tooltip>
+        </CustomTooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -52,35 +59,18 @@ export default function AccountMenu() {
         onClick={handleClose}
         PaperProps={{
           elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
+          sx: styles.menuStyle,
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar
+            alt="profile-icon"
+            src="/Images/boy.png"
+            sx={{ width: 35, height: 35 }}
+          />
+          Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Avatar /> My account
@@ -88,19 +78,13 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={()=>router.push("/")}>
+        <MenuItem onClick={() => handleLogout()}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <LogoutIcon fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>

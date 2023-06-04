@@ -7,6 +7,7 @@ const LoginSchema = yup.object().shape({
 });
 
 const SignupSchema = yup.object().shape({
+  username: yup.string().required(Messages.Username.required),
   email: yup.string().email().required(Messages.Email.required),
   password: yup.string().required(Messages.Password.required),
   confirm_password: yup

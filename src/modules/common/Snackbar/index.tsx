@@ -1,13 +1,13 @@
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React,{useState,useEffect} from "react";
+import React, { useEffect, useState } from "react";
 
 interface props {
   severity: "error" | "warning" | "info" | "success";
   message: string;
   open: boolean;
   vertical: "bottom" | "top";
-  horizontal: "left"| "right";
+  horizontal: "left" | "right";
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -17,14 +17,18 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export function CustomSnackbar({ message, severity,open,vertical,horizontal }: props) {
+export function CustomSnackbar({
+  message,
+  severity,
+  open,
+  vertical,
+  horizontal,
+}: props) {
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
-  console.log(open);
 
   useEffect(() => {
     setOpenSnackbar(open);
   }, [open]);
-
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -44,7 +48,11 @@ export function CustomSnackbar({ message, severity,open,vertical,horizontal }: p
       autoHideDuration={5000}
       onClose={handleClose}
     >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: "100%",fontSize:14 }}>
+      <Alert
+        onClose={handleClose}
+        severity={severity}
+        sx={{ width: "100%", fontSize: 14 }}
+      >
         {message}
       </Alert>
     </Snackbar>

@@ -1,5 +1,5 @@
-import globalReducer from "./globalReducers";
 import { initialState } from "./initialState";
+import globalReducers from "./globalReducers";
 
 const combineReducers = (reducers) => {
   return (state, action) => {
@@ -13,7 +13,7 @@ const combineReducers = (reducers) => {
 };
 
 const appReducers = combineReducers({
-  reducers: globalReducer,
+  globalReducer: globalReducers, // Corrected key name
 });
 
 export { initialState, appReducers };
