@@ -6,6 +6,15 @@ const LoginSchema = yup.object().shape({
   password: yup.string().required(Messages.Password.required),
 });
 
+const SignupSchema = yup.object().shape({
+  email: yup.string().email().required(Messages.Email.required),
+  password: yup.string().required(Messages.Password.required),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords do not match")
+    .required('Confirm Password is required'),
+});
+
 const SearchSchema = yup.object().shape({
   Search: yup.string().required(Messages.Search.required),
 });
@@ -28,4 +37,5 @@ export {
   SearchSchema,
   NewPostSchema,
   EditProfilePreviewUserSchema,
+  SignupSchema,
 };

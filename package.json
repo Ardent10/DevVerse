@@ -1,5 +1,5 @@
 {
-  "name": "devVerse",
+  "name": "devverse",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "appwrite": "^11.0.0",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

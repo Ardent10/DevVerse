@@ -107,6 +107,7 @@ const AddPost = () => {
             >
               {postOptions.map((option) => (
                 <PrimaryButton
+                  key={option.id}
                   title=""
                   type="button"
                   backgroundColor="#eeeeeed1"

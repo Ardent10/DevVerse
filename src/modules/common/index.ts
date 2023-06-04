@@ -10,3 +10,4 @@ export * from "./PrimaryButton";
 export * from "./ProfilePreview";
 export * from "./Search";
 export * from "./Tooltip";
+export * from "./Snackbar";

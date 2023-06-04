@@ -1,7 +1,7 @@
 import {LoginScreen} from "@modules/authentication/pages/login";
 import { NextPage } from "next";
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return <LoginScreen />;
 };
-export default Home;
+export default Login;
