@@ -11,3 +11,4 @@ export * from "./ProfilePreview";
 export * from "./Search";
 export * from "./Tooltip";
 export * from "./Snackbar";
+export * from "./Loder";

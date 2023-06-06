@@ -13,7 +13,7 @@ const SignupSchema = yup.object().shape({
   confirm_password: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords do not match")
-    .required('Confirm Password is required'),
+    .required("Confirm Password is required"),
 });
 
 const SearchSchema = yup.object().shape({
@@ -23,6 +23,7 @@ const SearchSchema = yup.object().shape({
 const NewPostSchema = yup.object().shape({
   title: yup.string().required(Messages.title.required),
   description: yup.string().required(Messages.description.required),
+  tags: yup.array().required(Messages.Tags.required),
 });
 
 const EditProfilePreviewUserSchema = yup.object().shape({

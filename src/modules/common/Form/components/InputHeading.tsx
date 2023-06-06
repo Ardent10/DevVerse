@@ -11,7 +11,7 @@ interface props {
   fontWeight?: number;
   color?: string;
   headingMargin?: string;
-  forgetPasswordLink?:boolean;
+  forgetPasswordLink?: boolean;
 }
 
 export function InputHeading({

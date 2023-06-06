@@ -1,3 +1,3 @@
-export * from "./InputField";
-export * from "./InputHeading";
-export * from "./TextAreaInput";
+export * from "./components/InputField";
+export * from "./components/InputHeading";
+export * from "./components/TextAreaInput";

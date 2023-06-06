@@ -1,12 +1,13 @@
 import { TextareaAutosize } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Controller } from "react-hook-form";
-import {Error} from "../Error";
+import { Error } from "../../Error";
 
 const TextArea = styled(TextareaAutosize)(() => ({
   width: "100%",
   padding: 10,
   borderRadius: "8px",
+  fontFamily:"Tomorrow, sans-serif",
   "&:disabled": {
     "& .MuiOutlinedInput-input": {
       color: "#4b4b4b",

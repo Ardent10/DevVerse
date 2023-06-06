@@ -1,3 +1,3 @@
-export * from "./addNewPostModal";
-export * from "./addPost";
-export * from "./post";
+export * from "./components/addNewPostModal";
+export * from "./components/addPost";
+export * from "./components/post";

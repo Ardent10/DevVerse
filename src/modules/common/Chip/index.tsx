@@ -3,18 +3,25 @@ import Paper from "@mui/material/Paper";
 import * as React from "react";
 
 interface ChipData {
-  key: number;
+  key: number |string;
   label: string;
   icon?: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
 }
 
 interface props {
-  chipsArray: ChipData[];
+  // To use when object is passed
+  key?: number | string;
+  label?: string;
+  icon?: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
+  // To use when array is passed
+  chipsArray?: ChipData[];
   onDelete?: boolean;
 }
 
 export function Chips(props: props) {
-  const [chipData, setChipData] = React.useState<ChipData[]>(props.chipsArray);
+  const [chipData, setChipData] = React.useState<ChipData[]>(
+    props.chipsArray ? props.chipsArray : []
+  );
 
   const handleDelete = (chipToDelete: ChipData) => () => {
     setChipData((chips) =>
@@ -35,18 +42,28 @@ export function Chips(props: props) {
       component="ul"
       elevation={0}
     >
-      {chipData.map((data) => {
-        return (
-          <Chip
-            clickable
-            sx={{ margin: 0.5, backgroundColor: "#8a89fa",color:"#FFF" }}
-            key={data.key}
-            icon={data?.icon}
-            label={data.label}
-            onDelete={props.onDelete ? handleDelete(data) : undefined}
-          />
-        );
-      })}
+      {chipData.length > 0 ? (
+        chipData.map((data) => {
+          return (
+            <Chip
+              clickable
+              sx={{ margin: 0.5, backgroundColor: "#8a89fa", color: "#FFF" }}
+              key={data.key}
+              icon={data?.icon}
+              label={data.label}
+              onDelete={props.onDelete ? handleDelete(data) : undefined}
+            />
+          );
+        })
+      ) : (
+        <Chip
+          clickable
+          sx={{ margin: 0.5, backgroundColor: "#8a89fa", color: "#FFF" }}
+          key={props?.key}
+          icon={props?.icon}
+          label={props.label}
+        />
+      )}
     </Paper>
   );
 }

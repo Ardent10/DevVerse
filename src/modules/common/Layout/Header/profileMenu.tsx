@@ -13,6 +13,7 @@ import {
 import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import { sxStyles } from "./index.styles";
+import { useRouter } from "next/router";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -30,6 +31,8 @@ export default function AccountMenu() {
   async function handleLogout() {
     await Logout();
   }
+
+  const router = useRouter();
 
   return (
     <>
@@ -76,7 +79,7 @@ export default function AccountMenu() {
           <Avatar /> My account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={()=>router.push('/settings')}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

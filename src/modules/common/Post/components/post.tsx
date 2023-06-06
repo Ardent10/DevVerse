@@ -20,8 +20,8 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
-import { Chips } from "../Chip";
-import { CustomTooltip } from "../Tooltip";
+import { Chips } from "../../Chip";
+import { CustomTooltip } from "../../Tooltip";
 import { sxStyles } from "./index.styles";
 
 interface ExpandMoreProps extends IconButtonProps {

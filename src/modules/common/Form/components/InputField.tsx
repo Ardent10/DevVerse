@@ -1,9 +1,9 @@
 import { Grid, TextField } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import { Controller } from "react-hook-form";
-import {Error} from "../Error";
+import { Error } from "../../Error";
+import { InputHeading } from "./InputHeading";
 import { sxStyles } from "./index.styles";
-import {InputHeading} from "./InputHeading";
 
 const StyledInput = styled(
   TextField,
@@ -162,7 +162,9 @@ export const Input = ({
                 }}
                 disabled={disable}
                 size="small"
-                error={error || (required && isTouched && !value) ? true : false}
+                error={
+                  error || (required && isTouched && !value) ? true : false
+                }
                 value={value}
                 onBlur={onBlur} // notify when input is touched
                 onChange={onChange} // send value to hook form
@@ -171,9 +173,8 @@ export const Input = ({
                   max: maxDate ? maxDate : undefined,
                   min: minDate ? minDate : undefined,
                 }}
-                onKeyDown={(e)=> type==='date'? e.preventDefault():{}}
+                onKeyDown={(e) => (type === "date" ? e.preventDefault() : {})}
                 {...rest}
-
               />
             </Grid>
 

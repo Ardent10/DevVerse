@@ -1,5 +1,5 @@
+import { Input } from "@/modules/common/Form/components/InputField";
 import { LoginSchema } from "@/utils/validations";
-import { Input } from "@common/Form/InputField";
 import { PrimaryButton } from "@common/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {

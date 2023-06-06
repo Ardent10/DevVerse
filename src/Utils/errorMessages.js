@@ -108,4 +108,7 @@ export const Messages = {
   Github: {
     required: "⚠ GitHub is Required.",
   },
+  Tags: {
+    required: "⚠ Tags is Required.",
+  },
 };

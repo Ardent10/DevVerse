@@ -1,10 +1,11 @@
 import { useAuth } from "@/modules/authentication/hooks";
+import AddPost from "@/modules/common/Post/components/addPost";
+import { usePost } from "@/modules/common/Post/hooks";
 import {
   chipsArray,
   eventsArray,
   postData,
 } from "@/utils/SampleData/sampleData";
-import AddPost from "@common/Post/addPost";
 import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -50,13 +51,19 @@ const menuItems = [
 
 const HomeScreen: NextPage = () => {
   const { getAccount } = useAuth();
+  const { getPosts } = usePost();
 
   useEffect(() => {
     const fetchAccount = async () => {
       await getAccount();
     };
+    const fetchPosts = async () => {
+      await getPosts();
+    };
     fetchAccount();
+    fetchPosts();
   }, []);
+
   return (
     <Layout menuItems={menuItems}>
       <Grid container bgcolor="#f7f7f7" pt={10}>

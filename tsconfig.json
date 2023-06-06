@@ -30,6 +30,6 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     "src/store/reducers/index.js"
-  ],
+, "src/config/appwrite.js"  ],
   "exclude": ["node_modules"]
 }

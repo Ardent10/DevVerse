@@ -53,7 +53,7 @@ export function useAuth() {
           payload: {
             open: true,
             severity: "success",
-            message: "Welcome to DevVerse",
+            message: `Welcome ${res.clientName} to DevVerse`,
           },
         });
         router.push("/home");
@@ -82,19 +82,19 @@ export function useAuth() {
             message: `Welcome ${res.name} to DevVerse`,
           },
         });
+        dispatch({
+          type: "setUserProfile",
+          payload: {
+            name: res.name,
+            email: res.email,
+            id: res.$id,
+          },
+        });
         router.push("/home");
       } else {
         router.push("/");
       }
     } catch (error) {
-      dispatch({
-        type: "setToggleSnackbar",
-        payload: {
-          open: true,
-          severity: "error",
-          message: "You are not logged in,Account Fetch Failed",
-        },
-      });
       router.push("/");
     }
   };

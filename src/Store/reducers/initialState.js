@@ -5,4 +5,6 @@ export const initialState = {
     severity: "error",
     message: "",
   },
+  userProfile:null,
+  posts: [],
 };

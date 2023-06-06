@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { EditProfilePreviewUserSchema } from "../../../utils/validations";
 import { InputHeading, TextAreaInput } from "../Form";
-import { Input } from "../Form/InputField";
+import { Input } from "../Form/components/InputField";
 interface userProfilePreviewData {
   name: string;
   avatar: string;
@@ -221,6 +221,7 @@ export const ProfilePreview = () => {
                 borderColor="1px solid #8a89fa"
                 backgroundColor="#8a89fa"
                 fontSize={12}
+                fontWeight={500}
                 width={180}
                 height={30}
                 disableElevation

@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { BasicModal } from "../Modal";
-import { PrimaryButton } from "../PrimaryButton";
+import { BasicModal } from "../../Modal";
+import { PrimaryButton } from "../../PrimaryButton";
 import AddNewPostModal from "./addNewPostModal";
 
 const postOptions = [
@@ -59,7 +59,6 @@ const AddPost = () => {
         <Card
           sx={{
             minWidth: "100%",
-            // height: 100,
             p: 0,
           }}
         >
@@ -70,7 +69,6 @@ const AddPost = () => {
               xs={12}
               py={1}
               display="flex"
-              // justifyContent="center"
               alignItems="center"
             >
               <Grid item xs={1}>

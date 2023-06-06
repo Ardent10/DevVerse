@@ -1,4 +1,4 @@
-const globalReducers = (state, action={}) => {
+const globalReducers = (state, action = {}) => {
   const { type } = action;
   switch (type) {
     case "toggleSideBar": {
@@ -15,6 +15,18 @@ const globalReducers = (state, action={}) => {
           severity: action.payload.severity,
           message: action.payload.message,
         },
+      };
+    }
+    case "setUserProfile": {
+      return {
+        ...state,
+        userProfile: action.payload,
+      };
+    }
+    case "setPosts": {
+      return {
+        ...state,
+        posts: action.payload,
       };
     }
     default:

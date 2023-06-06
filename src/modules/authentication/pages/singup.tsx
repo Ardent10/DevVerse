@@ -1,6 +1,6 @@
+import { Input } from "@/modules/common/Form/components/InputField";
 import { useAppState } from "@/store";
 import { SignupSchema } from "@/utils/validations";
-import { Input } from "@common/Form/InputField";
 import { CustomSnackbar, PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {

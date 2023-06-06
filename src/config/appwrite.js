@@ -7,6 +7,6 @@ client
 
 const account = new Account(client);
 
-const database = new Databases(client, process.env.NEXT_PUBLIC_APPWRITE_DB_ID);
+const database = new Databases(client);
 
 export { account, database };
