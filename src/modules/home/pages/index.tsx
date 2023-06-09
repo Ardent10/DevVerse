@@ -7,47 +7,10 @@ import {
   postData,
 } from "@/utils/SampleData/sampleData";
 import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import HomeIcon from "@mui/icons-material/Home";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { Avatar, Badge, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";
-
-const menuItems = [
-  {
-    title: "Home",
-    icon: <HomeIcon />,
-  },
-  {
-    title: "Notifications",
-    icon: (
-      <Badge color="secondary" badgeContent={5}>
-        <NotificationsIcon />
-      </Badge>
-    ),
-  },
-  {
-    title: "Bookmarks",
-    icon: <BookmarkIcon />,
-  },
-  {
-    title: "Events",
-    icon: <WhatshotIcon />,
-  },
-  {
-    title: "Profile",
-    icon: <AccountCircleIcon />,
-  },
-  {
-    title: "User Settings",
-    icon: <ManageAccountsIcon />,
-  },
-];
 
 const HomeScreen: NextPage = () => {
   const { getAccount } = useAuth();
@@ -65,7 +28,7 @@ const HomeScreen: NextPage = () => {
   }, []);
 
   return (
-    <Layout menuItems={menuItems}>
+    <Layout>
       <Grid container bgcolor="#f7f7f7" pt={10}>
         <Grid item xs={2.5}>
           <ProfilePreview />

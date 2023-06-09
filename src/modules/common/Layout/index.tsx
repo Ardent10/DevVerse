@@ -1,21 +1,58 @@
 import { useAppState } from "@/store";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Box from "@mui/material/Box";
+import { Box, Badge } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import { CSSObject, styled, Theme, useTheme } from "@mui/material/styles";
+import { CSSObject, styled, Theme,useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { CustomSnackbar } from "../Snackbar";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import HomeIcon from "@mui/icons-material/Home";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 
 const drawerWidth = 240;
 
 interface props {
   children: any;
-  menuItems: Array<any>;
+  menuItems?: Array<any>;
 }
+
+const menuItems = [
+  {
+    title: "Home",
+    icon: <HomeIcon />,
+  },
+  {
+    title: "Notifications",
+    icon: (
+      <Badge color="secondary" badgeContent={5}>
+        <NotificationsIcon />
+      </Badge>
+    ),
+  },
+  {
+    title: "Bookmarks",
+    icon: <BookmarkIcon />,
+  },
+  {
+    title: "Events",
+    icon: <WhatshotIcon />,
+  },
+  {
+    title: "Profile",
+    icon: <AccountCircleIcon />,
+  },
+  {
+    title: "User Settings",
+    icon: <ManageAccountsIcon />,
+  },
+];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -108,7 +145,7 @@ export function Layout(props: props) {
             </IconButton>
           </DrawerHeader>
 
-          <Sidebar open={open} menuItems={props?.menuItems} />
+          <Sidebar open={open} menuItems={menuItems} />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1 }}>
           {props.children}
