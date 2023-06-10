@@ -52,35 +52,35 @@ const tags = [
   },
   {
     id: 3,
-    label: "April Tucker",
+    label: "TypeScript",
   },
   {
     id: 4,
-    label: "Ralph Hubbard",
+    label: "JavaScript",
   },
   {
     id: 5,
-    label: "Omar Alexander",
+    label: "NextJs",
   },
   {
     id: 6,
-    label: "Carlos Abbott",
+    label: "React",
   },
   {
     id: 7,
-    label: "Miriam Wagner",
+    label: "Material UI",
   },
   {
     id: 8,
-    label: "Bradley Wilkerson",
+    label: "HTML",
   },
   {
     id: 9,
-    label: "Virginia Andrews",
+    label: "CSS",
   },
   {
     id: 10,
-    label: "Kelly Snyder",
+    label: "ChatGPT",
   },
 ];
 
@@ -92,7 +92,6 @@ export default function AddNewPostModal(props: props) {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    alert(JSON.stringify(data));
     addPost({
       userId: state.userProfile.id,
       title: data.title,

@@ -1,20 +1,23 @@
 import { useAppState } from "@/store";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Box, Badge } from "@mui/material";
-import MuiDrawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import { CSSObject, styled, Theme,useTheme } from "@mui/material/styles";
-import * as React from "react";
-import { CustomSnackbar } from "../Snackbar";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HomeIcon from "@mui/icons-material/Home";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import { Badge, Box } from "@mui/material";
+import MuiDrawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles";
+import { useRouter } from "next/router";
+import * as React from "react";
+import { useEffect } from "react";
+import { Loader } from "../Loder";
+import { CustomSnackbar } from "../Snackbar";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 const drawerWidth = 240;
 
@@ -107,6 +110,25 @@ export function Layout(props: props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const router = useRouter();
+
+  useEffect(() => {
+
+    dispatch({
+      type: "setIsLoading",
+      payload: true,
+    });
+
+    const timeout = setTimeout(() => {
+       dispatch({
+         type: "setIsLoading",
+         payload: false,
+       });
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -148,7 +170,7 @@ export function Layout(props: props) {
           <Sidebar open={open} menuItems={menuItems} />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1 }}>
-          {props.children}
+          {state.isLoading ? <Loader /> : props.children}
         </Box>
       </Box>
     </>

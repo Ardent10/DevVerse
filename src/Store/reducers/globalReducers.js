@@ -29,6 +29,12 @@ const globalReducers = (state, action = {}) => {
         posts: action.payload,
       };
     }
+    case "setIsLoading": {
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    }
     default:
       return state;
   }

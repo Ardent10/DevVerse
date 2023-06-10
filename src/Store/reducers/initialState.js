@@ -7,4 +7,5 @@ export const initialState = {
   },
   userProfile:null,
   posts: [],
+  isLoading: false,
 };
