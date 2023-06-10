@@ -1,4 +1,3 @@
-import { useAppState } from "@/store";
 import { CustomTooltip } from "@common/Tooltip";
 import {
   Divider,
@@ -8,6 +7,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { sxStyles } from "./index.style";
 
 interface props {
@@ -16,28 +17,46 @@ interface props {
 }
 
 export default function Sidebar(props: props) {
-  const [state, dispatch] = useAppState();
-  const styles = sxStyles({ open: props.open });
+  const router = useRouter();
 
+  const styles = sxStyles({ open: props.open });
   return (
     <List sx={{ pt: 2 }}>
-      {props.menuItems.map((item, index) => (
-        <ListItem key={index} disablePadding sx={{ display: "block" }}>
-          <CustomTooltip placement="right" label={item.title}>
-            <ListItemButton sx={styles.listItemBtnStyles}>
-              <ListItemIcon sx={styles.listItemIconStyle}>
-                {item.icon}
-              </ListItemIcon>
+      {props.menuItems.map((item) => (
+        <Link key={item.id} href={item.link}>
+          <ListItem
+            key={item.id}
+            disablePadding
+            sx={{ display: "block", pb: 1 }}
+          >
+            <CustomTooltip placement="right" label={item.title}>
+              <ListItemButton
+                sx={
+                  router.pathname === item.link
+                    ? styles.listItemSelectedBtnStyles
+                    : styles.listItemBtnStyles
+                }
+              >
+                <ListItemIcon
+                  sx={
+                    router.pathname === item.link
+                      ? styles.listItemSelectedBtnIconStyle
+                      : styles.listItemIconStyle
+                  }
+                >
+                  {item.icon}
+                </ListItemIcon>
 
-              <ListItemText
-                primary={item.title}
-                sx={styles.listItemTextStyle}
-              />
-            </ListItemButton>
-          </CustomTooltip>
+                <ListItemText
+                  primary={item.title}
+                  sx={styles.listItemTextStyle}
+                />
+              </ListItemButton>
+            </CustomTooltip>
 
-          {index === 3 && <Divider />}
-        </ListItem>
+            {item.id === 4 && <Divider />}
+          </ListItem>
+        </Link>
       ))}
     </List>
   );

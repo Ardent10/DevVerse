@@ -1,4 +1,5 @@
 import { useAuth } from "@/modules/authentication/hooks";
+import { useAppState } from "@/store/index";
 import { CustomTooltip } from "@common/index";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
@@ -9,13 +10,15 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Typography,
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import { useRouter } from "next/router";
 import * as React from "react";
 import { sxStyles } from "./index.styles";
-import { useRouter } from "next/router";
 
 export default function AccountMenu() {
+  const [state] = useAppState();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,12 +39,20 @@ export default function AccountMenu() {
 
   return (
     <>
-      <Box display="flex" alignItems="center" textAlign="center">
-        <CustomTooltip label="Profile Menu" placement="bottom">
+      <CustomTooltip label="Profile Menu" placement="bottom">
+        <Box
+          display="flex"
+          alignItems="center"
+          textAlign="center"
+          border="1px solid #8a89fa"
+          borderRadius={2}
+          onClick={handleClick}
+        >
+          <Typography color="#8a89fa" fontWeight={600} p={1}>
+            {state?.userProfile?.name}
+          </Typography>
           <IconButton
-            onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -52,8 +63,8 @@ export default function AccountMenu() {
               sx={{ width: 35, height: 35 }}
             />
           </IconButton>
-        </CustomTooltip>
-      </Box>
+        </Box>
+      </CustomTooltip>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -79,7 +90,7 @@ export default function AccountMenu() {
           <Avatar /> My account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>router.push('/settings')}>
+        <MenuItem onClick={() => router.push("/settings")}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

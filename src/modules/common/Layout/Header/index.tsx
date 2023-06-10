@@ -97,7 +97,7 @@ export default function Header(props: props) {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            width={230}
+            width={220}
           >
             <IconButton>
               <WbSunnyRoundedIcon sx={{ color: "#8a89fa" }} />
@@ -106,14 +106,6 @@ export default function Header(props: props) {
               <BedtimeIcon sx={{ color: "#8a89fa" }} />
             </IconButton>
 
-            <PrimaryButton
-              title="Login"
-              type="button"
-              backgroundColor="#8a89fa"
-              fontSize={12}
-              fontWeight={400}
-              link="/"
-            />
             <ProfileMenu />
           </Box>
         </Toolbar>

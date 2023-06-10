@@ -24,6 +24,14 @@ const NewPostSchema = yup.object().shape({
   title: yup.string().required(Messages.title.required),
   description: yup.string().required(Messages.description.required),
   tags: yup.array().required(Messages.Tags.required),
+  // postImage: yup.mixed()
+  //   .test("required", "You need to provide a file", (file) => {
+  //     if (file && file.size) return true;
+  //     return false;
+  //   })
+  //   .test("fileSize", "The file is too large", (file) => {
+  //     return file && file.size <= 2000000;
+  //   }),
 });
 
 const EditProfilePreviewUserSchema = yup.object().shape({
@@ -35,9 +43,9 @@ const EditProfilePreviewUserSchema = yup.object().shape({
 });
 
 export {
-  LoginSchema,
-  SearchSchema,
-  NewPostSchema,
   EditProfilePreviewUserSchema,
+  LoginSchema,
+  NewPostSchema,
+  SearchSchema,
   SignupSchema,
 };

@@ -1,6 +1,5 @@
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import MicIcon from "@mui/icons-material/Mic";
+import DescriptionIcon from "@mui/icons-material/Description";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import {
   Avatar,
@@ -14,46 +13,52 @@ import { useState } from "react";
 import { BasicModal } from "../../Modal";
 import { PrimaryButton } from "../../PrimaryButton";
 import AddNewPostModal from "./addNewPostModal";
-
+import UploadImageModal from "./uploadImageModal";
 const postOptions = [
   {
     id: 1,
     title: "Photo",
     icon: <AddPhotoAlternateIcon sx={{ color: "#8a89fa" }} />,
+    modalType: "uploadImageModal",
   },
   {
     id: 2,
     title: "Video",
     icon: <PlayCircleOutlineIcon sx={{ color: "#8a89fa" }} />,
+    modalType: "uploadVideoModal",
   },
   {
     id: 3,
-    title: "Attachment",
-    icon: <AttachFileIcon sx={{ color: "#8a89fa" }} />,
-  },
-  {
-    id: 4,
-    title: "Audio",
-    icon: <MicIcon sx={{ color: "#8a89fa" }} />,
+    title: "Document",
+    icon: <DescriptionIcon sx={{ color: "#8a89fa" }} />,
+    modalType: "uploadDocumentModal",
   },
 ];
 
 const AddPost = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openModal, setOpenModal] = useState({ open: false, type: "" });
+  const handleOpenModal = (modalType: string) =>
+    setOpenModal({ open: true, type: modalType });
+  const handleCloseModal = () => setOpenModal({ open: false, type: "" });
 
   return (
     <>
       <BasicModal
         width={600}
-        open={open}
+        open={openModal.open}
         padding={0}
-        CloseModal={handleClose}
+        CloseModal={handleCloseModal}
         borderRadius={3}
         backdropBackgroundColor="#EFEFE"
       >
-        <AddNewPostModal CloseModal={handleClose} />
+        <>
+          {openModal.type === "addNewPostModal" && (
+            <AddNewPostModal CloseModal={handleCloseModal} />
+          )}
+          {openModal.type === "uploadImageModal" && (
+            <UploadImageModal CloseModal={handleCloseModal} />
+          )}
+        </>
       </BasicModal>
       <Grid container px={4}>
         <Card
@@ -89,7 +94,7 @@ const AddPost = () => {
                   width={630}
                   borderRadius="30px"
                   height={50}
-                  onClick={handleOpen}
+                  onClick={()=>handleOpenModal("addNewPostModal")}
                   disableElevation
                 />
               </Grid>
@@ -108,10 +113,11 @@ const AddPost = () => {
                   key={option.id}
                   title=""
                   type="button"
-                  backgroundColor="#eeeeeed1"
                   fontSize={12}
+                  borderColor="1px solid #8a89fa"
                   height={40}
                   disableElevation
+                  onClick={()=>handleOpenModal(option.modalType)}
                   buttonChild={
                     <>
                       {option.icon}

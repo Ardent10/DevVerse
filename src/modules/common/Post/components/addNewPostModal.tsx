@@ -1,9 +1,8 @@
 import { useAppState } from "@/store/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
-import MicIcon from "@mui/icons-material/Mic";
+import DescriptionIcon from "@mui/icons-material/Description";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -31,13 +30,8 @@ const newPostOptions = [
   },
   {
     id: 3,
-    title: "Attachment",
-    icon: <AttachFileIcon sx={{ color: "#8a89fa" }} />,
-  },
-  {
-    id: 4,
-    title: "Audio",
-    icon: <MicIcon sx={{ color: "#8a89fa" }} />,
+    title: "Document",
+    icon: <DescriptionIcon sx={{ color: "#8a89fa" }} />,
   },
 ];
 
@@ -142,8 +136,6 @@ export default function AddNewPostModal(props: props) {
               xs={12}
               container
               rowSpacing={2}
-              component="form"
-              noValidate
               p={3}
             >
               <Grid item xs={12}>

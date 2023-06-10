@@ -13,12 +13,32 @@ export const sxStyles = (props: props) => {
         color: "#FFFF",
       },
     },
+    listItemSelectedBtnStyles: {
+      minHeight: 48,
+      justifyContent: props.open ? "initial" : "center",
+      px: 2.5,
+      backgroundColor: "#8a89fa",
+      color: "#FFFF",
+      "&.MuiButtonBase-root:hover": {
+        backgroundColor: "#8a89fa",
+        color: "#FFFF",
+      },
+    },
     listItemIconStyle: {
       minWidth: 0,
       mr: props.open ? 3 : "auto",
       justifyContent: "center",
       color:"#000",
-      "&.MuiListItemIcon-root:hover": {
+      "&.MuiButtonBase-root:hover": {
+        color: "#FFFF",
+      },
+    },
+    listItemSelectedBtnIconStyle: {
+      minWidth: 0,
+      mr: props.open ? 3 : "auto",
+      justifyContent: "center",
+      color:"#FFFF",
+      "&.MuiButtonBase-root:hover": {
         color: "#FFFF",
       },
     },

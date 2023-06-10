@@ -5,6 +5,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HomeIcon from "@mui/icons-material/Home";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Badge, Box } from "@mui/material";
@@ -28,32 +29,50 @@ interface props {
 
 const menuItems = [
   {
+    id: 1,
     title: "Home",
     icon: <HomeIcon />,
+    link: "/home",
   },
   {
+    id: 2,
     title: "Notifications",
     icon: (
       <Badge color="secondary" badgeContent={5}>
         <NotificationsIcon />
       </Badge>
     ),
+    link: "/notifications",
   },
   {
+    id: 3,
+    title: "Friends",
+    icon: <PeopleAltIcon />,
+    link: "/friends",
+  },
+  {
+    id: 4,
     title: "Bookmarks",
     icon: <BookmarkIcon />,
+    link: "/bookmarks",
   },
   {
+    id: 5,
     title: "Events",
     icon: <WhatshotIcon />,
+    link: "/events",
   },
   {
+    id: 6,
     title: "Profile",
     icon: <AccountCircleIcon />,
+    link: "/profile",
   },
   {
+    id: 7,
     title: "User Settings",
     icon: <ManageAccountsIcon />,
+    link: "/user-settings",
   },
 ];
 
@@ -124,7 +143,7 @@ export function Layout(props: props) {
          type: "setIsLoading",
          payload: false,
        });
-    }, 2500);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -157,7 +176,7 @@ export function Layout(props: props) {
             justifyContent="space-between!important"
           >
             Your Developer's Social
-            {/* <Image src="/sidebar.jpg" width={120} height={50} alt="scorelab" /> */}
+            {/* <Image src="/sidebar.jpg" width={120} height={50} alt="devverse" /> */}
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
