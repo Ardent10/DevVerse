@@ -28,7 +28,9 @@
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.ts",
+    "**/**/*.js",
     "**/**/*.tsx",
+    "src/store/index.js",
     "src/store/reducers/index.js"
 , "src/config/appwrite.js"  ],
   "exclude": ["node_modules"]

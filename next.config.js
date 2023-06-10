@@ -13,7 +13,6 @@ const nextConfig = {
        "src/modules/common"
      );
      return config;
-      return config;
   },
 };
 
