@@ -1,4 +1,4 @@
-import { AppStateProvider, appReducers, initialState } from "@/store";
+import { AppStateProvider, appReducers, initialState } from "@/store/index";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
