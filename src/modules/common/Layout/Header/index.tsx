@@ -7,9 +7,9 @@ import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import { Box, IconButton, Toolbar } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
+import { SearchSchema } from "@utils/validations";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { SearchSchema } from "../../../../utils/validations";
 import { sxStyles } from "./index.styles";
 import ProfileMenu from "./profileMenu";
 

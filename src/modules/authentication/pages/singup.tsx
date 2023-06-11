@@ -1,6 +1,5 @@
 import { Input } from "@/modules/common/Form/components/InputField";
 import { useAppState } from "@/store";
-import { SignupSchema } from "../../../utils/validations";
 import { CustomSnackbar, PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -10,6 +9,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { SignupSchema } from "@utils/validations";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";

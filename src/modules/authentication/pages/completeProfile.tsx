@@ -1,5 +1,4 @@
 import { Input } from "@/modules/common/Form/components/InputField";
-import { LoginSchema } from "../../../utils/validations";
 import { PrimaryButton } from "@common/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -9,6 +8,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { LoginSchema } from "@utils/validations";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";

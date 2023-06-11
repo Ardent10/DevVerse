@@ -1,13 +1,13 @@
 import { useAuth } from "@/modules/authentication/hooks";
 import AddPost from "@/modules/common/Post/components/addPost";
 import { usePost } from "@/modules/common/Post/hooks";
+import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 import {
   chipsArray,
   eventsArray,
   postData,
-} from "@/utils/SampleData/sampleData";
-import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+} from "@utils/SampleData/sampleData";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect } from "react";

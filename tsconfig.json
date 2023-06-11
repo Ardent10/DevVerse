@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@modules/*": ["./src/modules/*"],
-      "@common/*": ["./src/modules/common/*"]
+      "@common/*": ["./src/modules/common/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": [
