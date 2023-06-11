@@ -30,6 +30,7 @@
     "**/*.tsx",
     "**/**/*.ts",
     "**/**/*.tsx",
+    "src/**/*",
     "src/store/index.tsx",
     "src/store/reducers/index.tsx",
     "src/utils/validations.tsx",
