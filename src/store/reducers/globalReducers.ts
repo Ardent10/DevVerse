@@ -1,19 +1,25 @@
-const globalReducers = (state, action = {}) => {
+type State = {
+  [key: string]: any;
+};
+type Action = {
+  type: string;
+  payload: object;
+};
+
+const globalReducers = (state: State, action: Action) => {
   const { type } = action;
   switch (type) {
     case "toggleSideBar": {
       return {
         ...state,
-        openCloseSideBar: action.data.openCloseSideBar,
+        openCloseSideBar: action.payload,
       };
     }
     case "setToggleSnackbar": {
       return {
         ...state,
         toggleSnackbar: {
-          open: action.payload.open,
-          severity: action.payload.severity,
-          message: action.payload.message,
+          ...action.payload,
         },
       };
     }
@@ -32,7 +38,7 @@ const globalReducers = (state, action = {}) => {
     case "setIsLoading": {
       return {
         ...state,
-        isLoading: action.payload,
+        ...action.payload,
       };
     }
     default:
@@ -40,4 +46,4 @@ const globalReducers = (state, action = {}) => {
   }
 };
 
-export default globalReducers;
+export { globalReducers };

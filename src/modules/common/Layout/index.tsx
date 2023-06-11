@@ -5,8 +5,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HomeIcon from "@mui/icons-material/Home";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Badge, Box } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
@@ -126,23 +126,25 @@ const Drawer = styled(MuiDrawer, {
 
 export function Layout(props: props) {
   const [state, dispatch] = useAppState();
+  const { globalReducer } = state;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
-
     dispatch({
       type: "setIsLoading",
-      payload: true,
+      payload: {
+        isLoading: true,
+      },
     });
 
     const timeout = setTimeout(() => {
-       dispatch({
-         type: "setIsLoading",
-         payload: false,
-       });
+      dispatch({
+        type: "setIsLoading",
+        payload: { isLoading: false },
+      });
     }, 1000);
 
     return () => clearTimeout(timeout);
@@ -189,7 +191,7 @@ export function Layout(props: props) {
           <Sidebar open={open} menuItems={menuItems} />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1 }}>
-          {state.isLoading ? <Loader /> : props.children}
+          {state?.isLoading ? <Loader /> : props.children}
         </Box>
       </Box>
     </>

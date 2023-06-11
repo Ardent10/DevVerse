@@ -28,10 +28,10 @@
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.ts",
-    "**/**/*.js",
     "**/**/*.tsx",
-    "src/store/index.js",
-    "src/store/reducers/index.js"
-, "src/config/appwrite.js"  ],
+    "src/store/index.tsx",
+    "src/store/reducers/index.ts",
+    "src/config/appwrite.ts"
+  ],
   "exclude": ["node_modules"]
 }

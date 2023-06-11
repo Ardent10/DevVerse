@@ -1,10 +1,10 @@
-import { AppStateProvider, appReducers, initialState } from "../src/store";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import createEmotionCache from "../src/createEmotionCache";
+import { AppStateProvider, globalReducers, initialState } from "../src/store";
 import theme from "../src/theme";
 // import { ApolloProvider } from "@apollo/client";
 // import { useApollo } from "../src/config/apolloclient";
@@ -26,7 +26,7 @@ export default function MyApp(props: MyAppProps) {
         <link rel="shortcut icon" href="/logo2.png" type="image/x-icon" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <AppStateProvider reducer={appReducers} initialState={initialState}>
+      <AppStateProvider reducer={globalReducers} initialState={initialState}>
         {/* <ApolloProvider client={apolloClient}> */}
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
