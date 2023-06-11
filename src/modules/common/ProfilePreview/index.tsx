@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { EditProfilePreviewUserSchema } from "../../../utils/validations";
+import { EditProfilePreviewUserSchema } from "@/utils/validations";
 import { InputHeading, TextAreaInput } from "../Form";
 import { Input } from "../Form/components/InputField";
 interface userProfilePreviewData {

@@ -131,13 +131,7 @@ export default function AddNewPostModal(props: props) {
           </Box>
           <Divider />
           <form onSubmit={onSubmit}>
-            <Grid
-              item
-              xs={12}
-              container
-              rowSpacing={2}
-              p={3}
-            >
+            <Grid item xs={12} container rowSpacing={2} p={3}>
               <Grid item xs={12}>
                 <Input
                   name="title"

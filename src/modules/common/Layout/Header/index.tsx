@@ -1,9 +1,9 @@
-import { PrimaryButton, SearchBar } from "@common/index";
+import { SearchBar } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import BedtimeIcon from "@mui/icons-material/Bedtime";
 import { Box, IconButton, Toolbar } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";

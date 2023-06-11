@@ -30,7 +30,8 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     "src/store/index.tsx",
-    "src/store/reducers/index.ts",
+    "src/store/reducers/index.tsx",
+    "src/utils/validations.tsx",
     "src/config/appwrite.ts"
   ],
   "exclude": ["node_modules"]
