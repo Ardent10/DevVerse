@@ -15,8 +15,9 @@ export const sxStyles = () => {
     avatarStyle: { width: 56, height: 56 },
     cardHeaderStyle: {
       ".MuiCardHeader-title": { fontSize: 14, fontWeight: 500 },
+      paddingBottom: 0,
     },
-    cardActionTopStyle: { display: "flex" },
+    cardActionTopStyle: { display: "flex",py:0 },
     cardActionBottomStyle: { display: "flex", justifyContent: "space-between" },
     loveIconStyle: { color: "Red", fontSize: 25 },
     likeIconStyle: { color: "#8a89fa", fontSize: 25 },

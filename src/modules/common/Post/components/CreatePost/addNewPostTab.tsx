@@ -1,20 +1,24 @@
 import { useAppState } from "@/store/index";
-import { yupResolver } from "@hookform/resolvers/yup";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CloseIcon from "@mui/icons-material/Close";
+
 import DescriptionIcon from "@mui/icons-material/Description";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
-import { NewPostSchema } from "@utils/validations";
-import { useForm } from "react-hook-form";
-import { Input, InputHeading, TextAreaInput } from "../../Form";
-import { PrimaryButton } from "../../PrimaryButton";
-import { ChipSelector } from "../../Select";
-import { CustomTooltip } from "../../Tooltip";
-import { usePost } from "../hooks";
+import SentimentVerySatisfiedOutlinedIcon from "@mui/icons-material/SentimentVerySatisfiedOutlined";
+import { Box, Divider, Grid, IconButton } from "@mui/material";
+import { Input, InputHeading, TextAreaInput } from "../../../Form";
+import { PrimaryButton } from "../../../PrimaryButton";
+import { ChipSelector } from "../../../Select";
+import { CustomTooltip } from "../../../Tooltip";
+import { usePost } from "../../hooks";
 
 interface props {
-  CloseModal: any;
+  JumpToTab: (TabValue: number) => void;
+  onNextClick: () => void;
+  formData: any;
+  CloseModal: () => void;
+  control: any;
+  resetForm: any;
+  postData: any;
 }
 
 const newPostOptions = [
@@ -32,6 +36,11 @@ const newPostOptions = [
     id: 3,
     title: "Document",
     icon: <DescriptionIcon sx={{ color: "#8a89fa" }} />,
+  },
+  {
+    id: 4,
+    title: "Emoji",
+    icon: <SentimentVerySatisfiedOutlinedIcon sx={{ color: "#8a89fa" }} />,
   },
 ];
 
@@ -78,22 +87,15 @@ const tags = [
   },
 ];
 
-export default function AddNewPostModal(props: props) {
+export function AddNewPostTab({
+  CloseModal,
+  onNextClick,
+  JumpToTab,
+  control,
+  postData,
+}: props) {
   const [state, dispatch] = useAppState();
   const { addPost } = usePost();
-  const { handleSubmit, control, reset } = useForm({
-    resolver: yupResolver(NewPostSchema),
-  });
-
-  const onSubmit = handleSubmit(async (data) => {
-    addPost({
-      userId: state.userProfile.id,
-      title: data.title,
-      description: data.description,
-      tags: data.tags,
-    });
-    props.CloseModal();
-  });
 
   return (
     <Grid container>
@@ -104,33 +106,8 @@ export default function AddNewPostModal(props: props) {
             flexDirection: "column",
           }}
         >
-          <Box borderRadius="12px 12px 0 0">
-            <Box
-              p={1}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                component="h1"
-                variant="h5"
-                fontSize={22}
-                fontWeight={500}
-                color="#8a89fa"
-                ml={2}
-              >
-                Create a Post
-              </Typography>
-              <IconButton onClick={props.CloseModal}>
-                <CloseIcon fontSize="large" sx={{ color: "#8a89fa" }} />
-              </IconButton>
-            </Box>
-          </Box>
           <Divider />
-          <form onSubmit={onSubmit}>
+          <form>
             <Grid item xs={12} container rowSpacing={2} p={3}>
               <Grid item xs={12}>
                 <Input
@@ -142,12 +119,16 @@ export default function AddNewPostModal(props: props) {
                   disable={false}
                   inputHeadingType="Bold"
                   inputHeadingLabel="Title"
-                  required
+                  required={true}
                 />
               </Grid>
               <Grid item xs={12}>
                 <InputHeading label="Description" required color="#8a89fa" />
-                <TextAreaInput name="description" control={control} />
+                <TextAreaInput
+                  name="description"
+                  control={control}
+                  required={true}
+                />
               </Grid>
               <Grid item xs={12}>
                 <ChipSelector
@@ -183,12 +164,22 @@ export default function AddNewPostModal(props: props) {
               <Grid item xs={2}>
                 <PrimaryButton
                   fontSize={12}
-                  title="Create"
-                  type="submit"
+                  title="Next"
+                  type="button"
                   borderColor="1px solid #8a89fa"
                   backgroundColor="#8a89fa"
                   borderRadius="8px"
                   height={45}
+                  width={90}
+                  disabled={
+                    postData.title === "" ||
+                    postData.description === "" ||
+                    postData.tags.length === 0
+                  }
+                  onClick={() => {
+                    onNextClick();
+                    JumpToTab(2);
+                  }}
                 />
               </Grid>
             </Grid>

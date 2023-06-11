@@ -1,3 +1,4 @@
+import { useAppState } from "@/store";
 import CommentOutlineIcon from "@mui/icons-material/CommentOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -22,6 +23,7 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { Chips } from "../../Chip";
 import { CustomTooltip } from "../../Tooltip";
+import { DateTimeFormat } from "./dateTimeFormat";
 import { sxStyles } from "./index.styles";
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -43,6 +45,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export function Post({ postData }: props) {
+  const [state] = useAppState();
   const [expanded, setExpanded] = useState(-1);
 
   const handleExpandClick = (idx: number) => {
@@ -53,14 +56,14 @@ export function Post({ postData }: props) {
 
   return (
     <>
-      {postData?.map((post, idx) => (
-        <Grid key={idx} container px={4} py={2}>
+      {state.posts?.map((post: any, idx: number) => (
+        <Grid key={idx} container px={4} py={1}>
           <Card sx={{ minWidth: "100%" }}>
             <CardHeader
               avatar={
                 <Avatar
                   alt="Remy Sharp"
-                  src={post.headerImg}
+                  src={postData[0].headerImg}
                   sx={styles.avatarStyle}
                 />
               }
@@ -69,14 +72,19 @@ export function Post({ postData }: props) {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={post.headerTitle}
-              subheader={post.publishDate}
+              title={post.fullName}
+              subheader={
+                <DateTimeFormat
+                  dateTime={post.createdAt}
+                  format="DD MMM, YYYY"
+                />
+              }
               sx={styles.cardHeaderStyle}
             />
             <CardActions disableSpacing sx={styles.cardActionTopStyle}>
               <CardContent>
                 <Typography id="title" variant="body2" fontSize={14}>
-                  {post.postTitle}
+                  {post.title}
                 </Typography>
               </CardContent>
               <ExpandMore
@@ -90,9 +98,9 @@ export function Post({ postData }: props) {
             </CardActions>
 
             <Collapse in={expanded === idx} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography p={1} whiteSpace="pre-line" paragraph>
-                  {post.postDescription}
+              <CardContent sx={{ py: 0 }}>
+                <Typography px={1} whiteSpace="pre-line" paragraph>
+                  {post.description}
                 </Typography>
               </CardContent>
             </Collapse>

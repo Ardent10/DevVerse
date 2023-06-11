@@ -20,6 +20,7 @@ export function LoginScreen() {
   const router = useRouter();
   const { getAccount, Login } = useAuth();
   const [state, dispatch] = useAppState();
+  // const [login, { loading, error }] = useMutation(Login);
 
   const defaultValues = {
     email: "john@devverse.com",
