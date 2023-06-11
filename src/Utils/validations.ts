@@ -12,7 +12,7 @@ const SignupSchema = yup.object().shape({
   password: yup.string().required(Messages.Password.required),
   confirm_password: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords do not match")
+    .oneOf([yup.ref("password"), undefined], "Passwords do not match")
     .required("Confirm Password is required"),
 });
 

@@ -102,9 +102,6 @@ export const Messages = {
   Bio: {
     required: "⚠ Description is Required.",
   },
-  Location: {
-    required: "⚠ Location is Required.",
-  },
   Github: {
     required: "⚠ GitHub is Required.",
   },
