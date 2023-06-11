@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 
-export function SignupScreen() {
+export function CompleteProfile() {
   const defaultValues = {
     email: "developer@devverse.com",
     password: "Test@123",

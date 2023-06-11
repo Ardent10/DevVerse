@@ -94,7 +94,7 @@ const AddPost = () => {
                   width={630}
                   borderRadius="30px"
                   height={50}
-                  onClick={()=>handleOpenModal("addNewPostModal")}
+                  onClick={() => handleOpenModal("addNewPostModal")}
                   disableElevation
                 />
               </Grid>
@@ -117,7 +117,7 @@ const AddPost = () => {
                   borderColor="1px solid #8a89fa"
                   height={40}
                   disableElevation
-                  onClick={()=>handleOpenModal(option.modalType)}
+                  onClick={() => handleOpenModal(option.modalType)}
                   buttonChild={
                     <>
                       {option.icon}
