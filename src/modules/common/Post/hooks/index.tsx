@@ -54,19 +54,17 @@ export function usePost() {
 
   const getPosts = async () => {
     try {
-
-        const res = await database.listDocuments(
-          process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-          process.env.NEXT_PUBLIC_POST_COLLECTION_ID ?? "",
-          [Query.equal("userId", userId)]
-        );
-        if (res.documents) {
-          dispatch({
-            type: "setPosts",
-            payload: res.documents,
-          });
-        }
-
+      const res = await database.listDocuments(
+        process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
+        process.env.NEXT_PUBLIC_POST_COLLECTION_ID ?? "",
+        [Query.equal("userId", userId)]
+      );
+      if (res.documents) {
+        dispatch({
+          type: "setPosts",
+          payload: res.documents,
+        });
+      }
     } catch (error) {
       dispatch({
         type: "setToggleSnackbar",
