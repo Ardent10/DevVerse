@@ -1,4 +1,5 @@
 import { Input } from "@/modules/common/Form/components/InputField";
+import { Selector } from "@/modules/common/Select";
 import { useAppState } from "@/store";
 import { CustomSnackbar, PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import LocationJson from "@utils/SampleData/location.json";
 import { SignupSchema } from "@utils/validations";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,8 +18,15 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth } from "../hooks";
 
+interface CountryData {
+  name: string;
+  flag: string;
+  [key: string]: any;
+}
+
 export function SignupScreen() {
   const { Signup } = useAuth();
+  const [countries, setCountries] = useState<CountryData[]>([]);
   const [state, dispatch] = useAppState();
   const [openSnackbar, setOpenSnackbar] = useState({
     open: false,
@@ -30,7 +39,11 @@ export function SignupScreen() {
     email: "john@devverse.com",
     password: "Test@123",
     confirm_password: "Test@123",
+    location: "India",
     agree_tnc: true,
+    github: "",
+    firstName: "",
+    lastName: "",
   };
 
   const { handleSubmit, control, reset } = useForm({
@@ -39,10 +52,15 @@ export function SignupScreen() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
     await Signup({
       email: data.email,
       password: data.password,
       username: data.username,
+      location: data.location,
+      github: data.github,
+      firstName: data.firstName,
+      lastName: data.lastName,
     });
   });
 
@@ -94,78 +112,142 @@ export function SignupScreen() {
               p={8}
               justifyContent="center"
               alignItems="center"
-              height="70vh"
+              height="80vh"
             >
               <Grid item xs={10}>
                 <Typography
                   component="h1"
-                  variant="h5"
+                  variant="h2"
                   fontSize={40}
                   fontWeight={500}
                   color="#8a89fa"
                   textAlign="center"
+                  mb={3}
                 >
                   Create Your Account
                 </Typography>
               </Grid>
-              <Grid item xs={8} rowSpacing={2}>
+              <Grid item xs={10} rowSpacing={2}>
                 <form onSubmit={onSubmit}>
                   <Grid container rowSpacing={2}>
-                    <Grid item xs={12}>
-                      <Grid container columnSpacing={2}>
-                        <Grid item xs={6}>
-                          <Input
-                            name="username"
-                            control={control}
-                            type="text"
-                            placeholder="Enter Username*"
-                            disable={false}
-                            inputHeadingType="Bold"
-                            inputHeadingLabel="Username"
-                            required
-                          />
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Input
-                            name="email"
-                            control={control}
-                            type="email"
-                            placeholder="Enter Email*"
-                            disable={false}
-                            inputHeadingType="Bold"
-                            inputHeadingLabel="Email"
-                            required
-                          />
-                        </Grid>
+                    <Grid item container columnSpacing={2} xs={12}>
+                      <Grid item xs={6}>
+                        <Input
+                          name="firstName"
+                          control={control}
+                          type="text"
+                          placeholder="Enter First Name*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="First Name"
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Input
+                          name="lastName"
+                          control={control}
+                          type="text"
+                          placeholder="Enter Last Name*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Last Name"
+                          required
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid item container columnSpacing={2} xs={12}>
+                      <Grid item xs={6}>
+                        <Input
+                          name="github"
+                          control={control}
+                          type="text"
+                          placeholder="Enter Your GitHub*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Github"
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        {/* <Input
+                          name="location"
+                          control={control}
+                          type="text"
+                          placeholder="Location*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Last Name"
+                          required
+                        /> */}
+                        <Selector
+                          name="location"
+                          control={control}
+                          title="Location"
+                          disable={false}
+                          fontSize={14}
+                          menuItemFontWeight={600}
+                          color="#4b4b4b"
+                          display="flex"
+                          selectHeadingGridSpace={3}
+                          selectFieldGridSpace={6}
+                          margin={"0 0 5px"}
+                          data={LocationJson}
+                          required={true}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid item container columnSpacing={2} xs={12}>
+                      <Grid item xs={6}>
+                        <Input
+                          name="username"
+                          control={control}
+                          type="text"
+                          placeholder="Enter Username*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Username"
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Input
+                          name="email"
+                          control={control}
+                          type="email"
+                          placeholder="Enter Email*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Email"
+                          required
+                        />
                       </Grid>
                     </Grid>
 
-                    <Grid item xs={12}>
-                      <Grid container columnSpacing={2}>
-                        <Grid item xs={6}>
-                          <Input
-                            name="password"
-                            control={control}
-                            type="password"
-                            placeholder="Password*"
-                            disable={false}
-                            inputHeadingType="Bold"
-                            inputHeadingLabel="Password"
-                            required
-                          />
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Input
-                            name="confirm_password"
-                            control={control}
-                            type="password"
-                            placeholder="Confirm Password*"
-                            disable={false}
-                            inputHeadingType="Bold"
-                            inputHeadingLabel="Confirm Password"
-                            required
-                          />
-                        </Grid>
+                    <Grid item container columnSpacing={2} xs={12}>
+                      <Grid item xs={6}>
+                        <Input
+                          name="password"
+                          control={control}
+                          type="password"
+                          placeholder="Password*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Password"
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Input
+                          name="confirm_password"
+                          control={control}
+                          type="password"
+                          placeholder="Password*"
+                          disable={false}
+                          inputHeadingType="Bold"
+                          inputHeadingLabel="Confirm Password"
+                          required
+                        />
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
@@ -189,20 +271,20 @@ export function SignupScreen() {
                             }}
                           />
                         }
-                        label="I agree to DevVerse Term & Conditions."
+                        label="I agree to CodeLabz Term & Conditions."
                       />
                     </Grid>
                     <Grid item xs={12} justifyContent="center" mt={1}>
                       <PrimaryButton
                         fontSize={12}
-                        fontWeight={600}
-                        title="Sign Up"
+                        title="Sing Up"
                         type="submit"
                         borderColor="1px solid #8a89fa"
                         backgroundColor="#8a89fa"
                         borderRadius="8px"
                         height={35}
                         width={425}
+                        showLoaderonBtn
                       />
                     </Grid>
                   </Grid>

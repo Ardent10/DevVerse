@@ -1,7 +1,10 @@
-import { Grid } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Select from "@mui/material/Select";
+import {
+  Grid,
+  ListItemIcon,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Error } from "../../Error";
 import { InputHeading } from "../../Form/components/InputHeading";
@@ -135,10 +138,20 @@ export function Selector({
                 {data.map((d: any) => {
                   return (
                     <MenuItem
-                      key={d.id}
+                      key={d.id ? d.id : d.label}
                       value={sendId === true ? d.id : d.label}
                       sx={styles.menuItemStyle}
                     >
+                      {d.icon && (
+                        <ListItemIcon>
+                          <img
+                            src={d.icon}
+                            alt="country"
+                            height={10}
+                            width={10}
+                          />
+                        </ListItemIcon>
+                      )}
                       {(d.showLabel && d.showLabel) || d.label}
                     </MenuItem>
                   );

@@ -36,7 +36,10 @@ export const sxStyles = () => {
       background: "#ffff",
       flexGrow: 1,
     },
-    appBarStyle: { boxShadow: "10px 10px 12px 0 rgba(0,0,0,.07)" },
+    appBarStyle: {
+      boxShadow: "10px 10px 12px 0 rgba(0,0,0,.07)",
+      padding: "0 !important",
+    },
     toolBarStyle: {
       display: "flex",
       justifyContent: "space-between",

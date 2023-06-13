@@ -9,8 +9,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { PrimaryButton } from "../../PrimaryButton";
+import { PrimaryButton } from "../../../PrimaryButton";
 const postOptions = [
   {
     id: 1,
@@ -33,11 +32,6 @@ const postOptions = [
 ];
 
 export const AddPost = ({ toggleCreatePostModal }: any) => {
-  const [openModal, setOpenModal] = useState({ open: false, type: "" });
-  const handleOpenModal = (modalType: string) =>
-    setOpenModal({ open: true, type: modalType });
-  const handleCloseModal = () => setOpenModal({ open: false, type: "" });
-
   return (
     <Grid container px={4}>
       <Card

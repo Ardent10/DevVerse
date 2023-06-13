@@ -1,4 +1,3 @@
-import { useAppState } from "@/store/index";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -9,7 +8,6 @@ import { Input, InputHeading, TextAreaInput } from "../../../Form";
 import { PrimaryButton } from "../../../PrimaryButton";
 import { ChipSelector } from "../../../Select";
 import { CustomTooltip } from "../../../Tooltip";
-import { usePost } from "../../hooks";
 
 interface props {
   JumpToTab: (TabValue: number) => void;
@@ -19,6 +17,7 @@ interface props {
   control: any;
   resetForm: any;
   postData: any;
+  isDirty: boolean;
 }
 
 const newPostOptions = [
@@ -85,6 +84,46 @@ const tags = [
     id: 10,
     label: "ChatGPT",
   },
+  {
+    id: 11,
+    label: "NewLabel",
+  },
+  {
+    id: 12,
+    label: "Node.js",
+  },
+  {
+    id: 13,
+    label: "Express.js",
+  },
+  {
+    id: 14,
+    label: "MongoDB",
+  },
+  {
+    id: 15,
+    label: "Python",
+  },
+  {
+    id: 16,
+    label: "Docker",
+  },
+  {
+    id: 17,
+    label: "Kubernetes",
+  },
+  {
+    id: 18,
+    label: "AWS",
+  },
+  {
+    id: 19,
+    label: "GraphQL",
+  },
+  {
+    id: 20,
+    label: "Vue.js",
+  },
 ];
 
 export function AddNewPostTab({
@@ -93,10 +132,8 @@ export function AddNewPostTab({
   JumpToTab,
   control,
   postData,
+  isDirty,
 }: props) {
-  const [state, dispatch] = useAppState();
-  const { addPost } = usePost();
-
   return (
     <Grid container>
       <Grid item xs={12} sm={8} md={12}>
@@ -120,6 +157,7 @@ export function AddNewPostTab({
                   inputHeadingType="Bold"
                   inputHeadingLabel="Title"
                   required={true}
+                  inputFieldPadding={2}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -171,11 +209,7 @@ export function AddNewPostTab({
                   borderRadius="8px"
                   height={45}
                   width={90}
-                  disabled={
-                    postData.title === "" ||
-                    postData.description === "" ||
-                    postData.tags.length === 0
-                  }
+                  disabled={!isDirty}
                   onClick={() => {
                     onNextClick();
                     JumpToTab(2);

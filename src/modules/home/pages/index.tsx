@@ -34,15 +34,15 @@ const HomeScreen: NextPage = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (state.userProfile?.id) {
+      if (state.userProfile?.$id) {
         await getPosts();
       }
     };
 
-    if (state.userProfile?.id) {
+    if (state.userProfile?.$id) {
       fetchPosts();
     }
-  }, [state.userProfile?.id]);
+  }, [state.userProfile?.$id]);
 
   return (
     <>

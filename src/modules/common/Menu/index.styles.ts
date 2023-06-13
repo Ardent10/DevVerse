@@ -13,9 +13,9 @@ export const sxStyles = (props: props) => {
     menuItemStyle: {
       padding: 2,
       "&.MuiMenuItem-root:hover": {
-        borderRadius: 5,
-        background: "#8a89fa",
-        color: "#FFFF",
+        borderRadius: 1.5,
+        // background: "#8a89fa",
+        // color: "#FFFF",
       },
     },
     menuListIconStyle: {

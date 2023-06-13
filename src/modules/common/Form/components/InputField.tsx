@@ -56,6 +56,7 @@ interface props {
   forgetPasswordLink?: boolean;
   maxDate?: Date | string;
   minDate?: Date | string;
+  inputFieldPadding?: string|number;
 }
 
 export const Input = ({
@@ -79,12 +80,14 @@ export const Input = ({
   forgetPasswordLink,
   maxDate,
   minDate,
+  inputFieldPadding,
 }: props) => {
   const theme = useTheme();
   const styles = sxStyles({
     theme,
     leftMarginToInputField,
     inputTextPaddingLeft,
+    inputFieldPadding,
   });
 
   return (
@@ -149,10 +152,11 @@ export const Input = ({
             )}
 
             <Grid item xs={direction === "row" ? inputFieldGridSpace : 12}>
-              <StyledInput
+              <TextField
                 sx={{
                   ...styles.giveLeftMargin,
                   ...styles.giveLeftPaddingInputText,
+                  ...styles.inputFieldStyle,
                 }}
                 type={type}
                 placeholder={placeholder}

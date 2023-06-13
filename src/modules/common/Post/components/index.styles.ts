@@ -17,7 +17,7 @@ export const sxStyles = () => {
       ".MuiCardHeader-title": { fontSize: 14, fontWeight: 500 },
       paddingBottom: 0,
     },
-    cardActionTopStyle: { display: "flex",py:0 },
+    cardActionTopStyle: { display: "flex", py: 0 },
     cardActionBottomStyle: { display: "flex", justifyContent: "space-between" },
     loveIconStyle: { color: "Red", fontSize: 25 },
     likeIconStyle: { color: "#8a89fa", fontSize: 25 },
@@ -55,6 +55,29 @@ export const sxStyles = () => {
       letterSpacing: ".19px",
       fontWeight: "400",
       opacity: "1",
+    },
+    menuStyle: {
+      overflow: "visible",
+      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+      mt: 1.5,
+      "& .MuiAvatar-root": {
+        width: 32,
+        height: 32,
+        ml: -0.5,
+        mr: 1,
+      },
+      "&:before": {
+        content: '""',
+        display: "block",
+        position: "absolute",
+        top: 0,
+        right: 14,
+        width: 10,
+        height: 10,
+        bgcolor: "background.paper",
+        transform: "translateY(-50%) rotate(45deg)",
+        zIndex: 0,
+      },
     },
   };
 };

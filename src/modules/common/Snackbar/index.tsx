@@ -1,3 +1,4 @@
+import { useAppState } from "@/store";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ export function CustomSnackbar({
   vertical,
   horizontal,
 }: props) {
+  const [state, dispatch] = useAppState();
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,6 +40,15 @@ export function CustomSnackbar({
       return;
     }
 
+    dispatch({
+      type: "setToggleSnackbar",
+      payload: {
+        open: false,
+        severity: "",
+        message: "",
+      },
+    });
+
     setOpenSnackbar(false);
   };
 
@@ -45,7 +56,7 @@ export function CustomSnackbar({
     <Snackbar
       open={openSnackbar}
       anchorOrigin={{ vertical, horizontal }}
-      autoHideDuration={5000}
+      autoHideDuration={3000}
       onClose={handleClose}
     >
       <Alert

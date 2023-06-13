@@ -9,46 +9,56 @@ interface addPostProps {
   title: string;
   description: string;
   tags: string[];
-  image?: any;
-  postImgId?: string;
+  postImage?: any;
+  fullName: string;
 }
 
 export function usePost() {
   const [state, dispatch] = useAppState();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState("");
 
   const addPost = async (data: addPostProps) => {
     try {
-      setLoading(true);
       // Upload the image file to Appwrite storage
-      const uploadImgResponse = await storage.createFile(
-        process.env.NEXT_PUBLIC_POSTIMG_BUCKET_ID ?? "",
-        ID.unique(),
-        data.image,
-        ["*"]
-      );
+      const uploadPromises = data.postImage.map((file: any) => {
+        return storage.createFile(
+          process.env.NEXT_PUBLIC_POSTIMG_BUCKET_ID ?? "",
+          ID.unique(),
+          file
+        );
+      });
 
-      // Get the file URL from the storage response
-      const imageURL = uploadImgResponse.$id;
+      const uploadImgResponses = await Promise.all(uploadPromises);
 
-      const res = await database.createDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-        process.env.NEXT_PUBLIC_POST_COLLECTION_ID ?? "",
-        ID.unique(),
-        { ...data, postImageId: imageURL }
-      );
-      if (res.$id) {
-        dispatch({
-          type: "setToggleSnackbar",
-          payload: {
-            open: true,
-            severity: "success",
-            message: "Post Added Successfully",
-          },
-        });
-        router.push("/home");
+      const imageURLs = uploadImgResponses.map((response: any) => response.$id);
+
+      console.log("DATA=>", uploadImgResponses, imageURLs);
+      if (imageURLs) {
+        const res = await database.createDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
+          process.env.NEXT_PUBLIC_POSTS_COLLECTION_ID ?? "",
+          ID.unique(),
+          {
+            fullName: data.fullName,
+            title: data.title,
+            description: data.description,
+            tags: data.tags,
+            userId: data.userId,
+            postImageIds: imageURLs,
+          }
+        );
+        if (res.$id) {
+          dispatch({
+            type: "setToggleSnackbar",
+            payload: {
+              open: true,
+              severity: "success",
+              message: "Post Added Successfully",
+            },
+          });
+          router.push("/home");
+        }
       }
     } catch (error) {
       dispatch({
@@ -59,8 +69,6 @@ export function usePost() {
           message: "Post Creation Failed",
         },
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -68,13 +76,41 @@ export function usePost() {
     try {
       const res = await database.listDocuments(
         process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-        process.env.NEXT_PUBLIC_POST_COLLECTION_ID ?? "",
-        [Query.equal("userId", state?.userProfile?.id)]
+        process.env.NEXT_PUBLIC_POSTS_COLLECTION_ID ?? "",
+        [Query.equal("userId", state?.userProfile?.$id)]
       );
+
       if (res.documents) {
+        const posts = res.documents;
+
+        // Fetch images from storage for each post
+        const postsWithImages = await Promise.all(
+          posts.map(async (post: any) => {
+            const postImageIds = post.postImageIds;
+            const imageUrls = await Promise.all(
+              postImageIds.map((imageId: string) =>
+                storage.getFilePreview(
+                  process.env.NEXT_PUBLIC_POSTIMG_BUCKET_ID ?? "",
+                  imageId
+                )
+              )
+            );
+            return {
+              id: post.$id,
+              createdAt: post.$createdAt,
+              fullName: post.fullName,
+              title: post.title,
+              description: post.description,
+              tags: post.tags,
+              userId: post.userId,
+              postImageUrls: imageUrls,
+            };
+          })
+        );
+
         dispatch({
           type: "setPosts",
-          payload: res.documents,
+          payload: postsWithImages,
         });
       }
     } catch (error) {
@@ -88,6 +124,31 @@ export function usePost() {
       });
     }
   };
+
+  // const getPosts = async () => {
+  //   try {
+  //     const res = await database.listDocuments(
+  //       process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
+  //       process.env.NEXT_PUBLIC_POSTS_COLLECTION_ID ?? "",
+  //       [Query.equal("userId", state?.userProfile?.$id)]
+  //     );
+  //     if (res.documents) {
+  //       dispatch({
+  //         type: "setPosts",
+  //         payload: res.documents,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     dispatch({
+  //       type: "setToggleSnackbar",
+  //       payload: {
+  //         open: true,
+  //         severity: "error",
+  //         message: "Post Fetching Failed",
+  //       },
+  //     });
+  //   }
+  // };
 
   // const getPosts = async () => {
   //   try {

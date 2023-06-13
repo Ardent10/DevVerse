@@ -49,7 +49,7 @@ export default function AccountMenu() {
           onClick={handleClick}
         >
           <Typography color="#8a89fa" fontWeight={600} p={1}>
-            {state?.userProfile?.name}
+            {state?.userProfile?.firstName + " " + state?.userProfile?.lastName}
           </Typography>
           <IconButton
             size="small"

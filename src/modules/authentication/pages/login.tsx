@@ -1,6 +1,7 @@
+import { CustomSnackbar } from "@/modules/common";
 import { Input } from "@/modules/common/Form/components/InputField";
 import { useAppState } from "@/store";
-import { CustomSnackbar, PrimaryButton } from "@common/index";
+import { PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Box,
@@ -20,7 +21,6 @@ export function LoginScreen() {
   const router = useRouter();
   const { getAccount, Login } = useAuth();
   const [state, dispatch] = useAppState();
-  // const [login, { loading, error }] = useMutation(Login);
 
   const defaultValues = {
     email: "john@devverse.com",
@@ -43,6 +43,8 @@ export function LoginScreen() {
   const onSubmit = handleSubmit(async (data) => {
     await Login({ email: data.email, password: data.password });
   });
+
+  console.log(state);
 
   return (
     <>
@@ -98,6 +100,9 @@ export function LoginScreen() {
                   textAlign="center"
                 >
                   Welcome Back
+                </Typography>
+                <Typography color="#8a89fa" textAlign="center">
+                  Enter the DevVerse: Unleash the realm of possibilities.
                 </Typography>
               </Grid>
               <Grid item xs={9} rowSpacing={2}>
@@ -162,6 +167,7 @@ export function LoginScreen() {
                         borderRadius="8px"
                         height={35}
                         width={390}
+                        showLoaderonBtn={true}
                       />
                     </Grid>
                   </Grid>
@@ -196,8 +202,11 @@ export function LoginScreen() {
             bgcolor="rgb(18, 25, 48)"
             sx={{
               backgroundImage: "url(/Images/bg2.png)",
+              // backgroundImage: "url(/loginBanner.jpg)",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
+              // objectFit: "cover",
+              // backgroundSize: "cover",
             }}
           >
             <Typography

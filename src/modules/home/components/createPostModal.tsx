@@ -9,6 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppState } from "@/store";
+import { usePost } from "@/modules/common/Post/hooks";
 
 interface tab {
   id: number;
@@ -25,6 +27,8 @@ interface props {
 
 export function CreatePostModal(props: props) {
   const [currentTab, setCurrentTab] = useState(1);
+  const [state, dispatch] = useAppState();
+  const { addPost } = usePost();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -36,19 +40,28 @@ export function CreatePostModal(props: props) {
     tags: [],
   });
 
-  const { handleSubmit, control, reset, watch, getValues, setValue } = useForm({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    watch,
+    getValues,
+    setValue,
+    formState: { isDirty },
+  } = useForm({
     resolver: yupResolver(NewPostSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log("DATA=>", data);
-    // addPost({
-    //   userId: state.userProfile.id,
-    //   title: data.title,
-    //   description: data.description,
-    //   tags: data.tags,
-    // });
-    // CloseModal();
+    await addPost({
+      userId: state?.userProfile?.$id,
+      title: data.title,
+      description: data.description,
+      postImage: data.postImage,
+      tags: data.tags,
+      fullName:state?.userProfile?.firstName + " " + state?.userProfile?.lastName
+    });
+   props.closeCreatePostModal();
   });
 
   useEffect(() => {
@@ -76,8 +89,6 @@ export function CreatePostModal(props: props) {
     });
   }
 
-  console.log("PostData", postData);
-
   const tabsArray: tab[] = [
     {
       id: 1,
@@ -93,6 +104,7 @@ export function CreatePostModal(props: props) {
           onNextClick={onNextClick}
           resetForm={reset}
           postData={postData}
+          isDirty={isDirty}
           // errorMsg={errorMsg}
         />
       ),

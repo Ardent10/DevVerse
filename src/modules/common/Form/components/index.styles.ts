@@ -8,6 +8,7 @@ interface props {
   color?: string;
   inputTextPaddingLeft?: string;
   headingMargin?: string;
+  inputFieldPadding?: string | number;
 }
 
 export const sxStyles = (props: props) => {
@@ -154,6 +155,35 @@ export const sxStyles = (props: props) => {
     disabledStyle: {
       backgroundColor: "#ededed",
       color: "#4b4b4b",
+    },
+
+    // InputField Styles
+    inputFieldStyle: {
+      ".MuiOutlinedInput-input": {
+        height: 15,
+        fontSize: 14,
+        color: "#000",
+        padding: props.inputFieldPadding
+          ? props.inputFieldPadding
+          : "8.5px 14px",
+        background: "#fff",
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "rgba(0, 0, 0, 0.23)", // default
+        },
+        "&.Mui-focused fieldset": {
+          boxShadow: "0 0 5px 1px #c8def0",
+          border: "1px solid #0f0da1",
+          borderColor: "#0f0da1", // focus
+        },
+      },
+      "& .Mui-disabled": {
+        "& .MuiOutlinedInput-input": {
+          color: "#4b4b4b",
+        },
+        backgroundColor: "#ededed",
+      },
     },
   };
 };

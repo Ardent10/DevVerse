@@ -1,7 +1,14 @@
 import { useAppState } from "@/store/index";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Divider, Grid, IconButton, Typography,Alert } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Divider,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { useRef, useState } from "react";
 import { PrimaryButton } from "../../../PrimaryButton";
 import Dropzone from "../dropzone";
@@ -17,7 +24,7 @@ interface props {
   resetForm: any;
   formData: any;
   onSubmit: any;
-  postData:any;
+  postData: any;
 }
 
 export function UploadImageTab({
@@ -96,7 +103,7 @@ export function UploadImageTab({
   const handleUpload = () => {
     if (fileTaken.length !== 0) {
       setValue("postImage", fileTaken);
-    }else{
+    } else {
       errorMsg = "Please select a file";
       return errorMsg;
     }
@@ -209,6 +216,7 @@ export function UploadImageTab({
                   backgroundColor="#8a89fa"
                   borderRadius="8px"
                   height={45}
+                  disabled={selectedFilePath.length === 0}
                   onClick={handleUpload}
                 />
               </Grid>

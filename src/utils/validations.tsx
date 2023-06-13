@@ -8,8 +8,12 @@ const LoginSchema = yup.object().shape({
 
 const SignupSchema = yup.object().shape({
   username: yup.string().required(Messages.Username.required),
+  firstName: yup.string().required(Messages.FirstName.required),
+  lastName: yup.string().required(Messages.LastName.required),
   email: yup.string().email().required(Messages.Email.required),
   password: yup.string().required(Messages.Password.required),
+  github: yup.string().required(Messages.Github.required),
+  location: yup.string().required(Messages.Location.required),
   confirm_password: yup
     .string()
     .oneOf([yup.ref("password"), undefined], "Passwords do not match")
