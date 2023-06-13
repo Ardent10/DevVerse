@@ -12,4 +12,3 @@ export * from "./Search";
 export * from "./Tooltip";
 export * from "./Snackbar";
 export * from "./Loder";
-export * from "./Notification";
