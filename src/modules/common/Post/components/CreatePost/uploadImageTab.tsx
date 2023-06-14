@@ -218,6 +218,7 @@ export function UploadImageTab({
                   height={45}
                   disabled={selectedFilePath.length === 0}
                   onClick={handleUpload}
+                  showLoaderonBtn={true}
                 />
               </Grid>
             </Grid>

@@ -60,7 +60,7 @@ export function Post({ postData }: props) {
       {state.posts.length > 0
         ? state.posts?.map((post: any, idx: number) => (
             <Grid key={idx} container px={4} py={1}>
-              <Card sx={{ minWidth: "100%" }}>
+              <Card key={idx} sx={{ minWidth: "100%" }}>
                 <CardHeader
                   avatar={
                     <Avatar
@@ -81,7 +81,12 @@ export function Post({ postData }: props) {
                 />
                 <CardActions disableSpacing sx={styles.cardActionTopStyle}>
                   <CardContent>
-                    <Typography id="title" variant="body2" fontSize={14} fontWeight={500}>
+                    <Typography
+                      id="title"
+                      variant="body2"
+                      fontSize={14}
+                      fontWeight={500}
+                    >
                       {post.title}
                     </Typography>
                   </CardContent>
@@ -105,7 +110,12 @@ export function Post({ postData }: props) {
 
                 {post.postImageUrls.length >= 1 &&
                   post.postImageUrls.map((postImg: any) => (
-                    <CardMedia component="img" src={postImg.href} alt="post" />
+                    <CardMedia
+                      key={postImg}
+                      component="img"
+                      src={postImg.href}
+                      alt="post"
+                    />
                   ))}
 
                 <CardActions sx={styles.cardActionBottomStyle}>
@@ -139,7 +149,7 @@ export function Post({ postData }: props) {
             </Grid>
           ))
         : postData?.map((post, idx) => (
-            <Grid container px={4} py={2}>
+            <Grid key={idx} container px={4} py={2}>
               <Card key={idx} sx={{ minWidth: "100%" }}>
                 <CardHeader
                   avatar={

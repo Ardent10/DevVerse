@@ -52,7 +52,6 @@ export function SignupScreen() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     await Signup({
       email: data.email,
       password: data.password,
@@ -170,16 +169,6 @@ export function SignupScreen() {
                         />
                       </Grid>
                       <Grid item xs={6}>
-                        {/* <Input
-                          name="location"
-                          control={control}
-                          type="text"
-                          placeholder="Location*"
-                          disable={false}
-                          inputHeadingType="Bold"
-                          inputHeadingLabel="Last Name"
-                          required
-                        /> */}
                         <Selector
                           name="location"
                           control={control}
@@ -283,7 +272,7 @@ export function SignupScreen() {
                         backgroundColor="#8a89fa"
                         borderRadius="8px"
                         height={35}
-                        width={425}
+                        width="100%"
                         showLoaderonBtn
                       />
                     </Grid>

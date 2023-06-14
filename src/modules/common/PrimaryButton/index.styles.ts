@@ -1,7 +1,7 @@
 import { Theme } from "@mui/material/styles";
 
 interface props {
-  width?: number;
+  width?: number | string;
   height?: number;
   fontSize?: number;
   fontWeight?: number;

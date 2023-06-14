@@ -36,7 +36,7 @@ export function useAuth() {
       if (res.$id) {
         await database.createDocument(
           process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-          process.env.NEXT_PUBLIC_USER_COLLECTION_ID ?? "",
+          process.env.NEXT_PUBLIC_USERS_COLLECTION_ID ?? "",
           res.$id,
           {
             email: email,
@@ -141,14 +141,6 @@ export function useAuth() {
     try {
       const res = await account.get();
       if (res.name && res.email && res.$id) {
-        dispatch({
-          type: "setToggleSnackbar",
-          payload: {
-            open: true,
-            severity: "success",
-            message: `Welcome ${res.name} to DevVerse`,
-          },
-        });
 
         // Get the logged user entire profile.
         const usersRes = await database.listDocuments(
@@ -156,7 +148,6 @@ export function useAuth() {
           process.env.NEXT_PUBLIC_USERS_COLLECTION_ID ?? "",
           [Query.equal("$id", res.$id)]
         );
-        
         dispatch({
           type: "setUserProfile",
           payload: {
@@ -168,7 +159,7 @@ export function useAuth() {
         router.push("/");
       }
     } catch (error) {
-      // router.push("/");
+      router.push("/");
     }
   };
 

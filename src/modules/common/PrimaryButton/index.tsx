@@ -6,7 +6,7 @@ import { sxStyles } from "./index.styles";
 
 interface props {
   title: string;
-  width?: number;
+  width?: number | string;
   height?: number;
   padding?: string | number;
   fontSize?: number;

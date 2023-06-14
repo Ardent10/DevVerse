@@ -42,7 +42,7 @@ const HomeScreen: NextPage = () => {
     if (state.userProfile?.$id) {
       fetchPosts();
     }
-  }, [state.userProfile?.$id]);
+  }, [state.userProfile?.$id, state.posts.length]);
 
   return (
     <>

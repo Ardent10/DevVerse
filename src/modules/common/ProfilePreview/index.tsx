@@ -1,17 +1,19 @@
+import { useAppState } from "@/store";
+import { userProfilePreview } from "@/utils/SampleData/sampleData";
 import { BasicCard, PrimaryButton } from "@common/index";
+import { yupResolver } from "@hookform/resolvers/yup";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import { Avatar, Box, Grid, Typography } from "@mui/material";
-import { userProfilePreview } from "@utils/SampleData/sampleData";
+import { Avatar, Grid, Typography } from "@mui/material";
+import { EditProfilePreviewUserSchema } from "@utils/validations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-import { EditProfilePreviewUserSchema } from "@utils/validations";
 import { useForm } from "react-hook-form";
 import { InputHeading, TextAreaInput } from "../Form";
 import { Input } from "../Form/components/InputField";
+
 interface userProfilePreviewData {
   name: string;
   avatar: string;
@@ -25,15 +27,35 @@ interface userProfilePreviewData {
 }
 
 export const ProfilePreview = () => {
+  const [state] = useAppState();
   const [sampleUserData, setSampleUserData] =
     useState<userProfilePreviewData | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null);
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    if (userProfilePreview) {
+    if (state.userProfile) {
+      setUserProfile({
+        id: state.userProfile.$id,
+        firstName: state.userProfile.firstName,
+        lastName: state.userProfile.lastName,
+        email: state.userProfile.email,
+        username: state.userProfile.username,
+        location: state.userProfile.location,
+        github: state.userProfile.github,
+        portfolio: state.userProfile.portfolio,
+        bio: state.userProfile.about,
+
+        avatar: state.userProfile.avatar,
+        bgImg: state.userProfile.bgImg,
+        follower: state.userProfile.follower,
+        following: state.userProfile.following,
+      });
+    } else {
       setSampleUserData(userProfilePreview);
     }
-  }, []);
+  }, [state.userProfile]);
+  console.log("userProfile", userProfile);
 
   const defaultValues = {
     name: "",
@@ -44,7 +66,15 @@ export const ProfilePreview = () => {
   };
 
   useEffect(() => {
-    if (sampleUserData) {
+    if (userProfile) {
+      reset({
+        name: `${userProfile?.firstName} ${userProfile?.lastName}`,
+        bio: userProfile?.bio,
+        location: userProfile?.location,
+        portfolio: userProfile?.portfolio,
+        github: userProfile?.github,
+      });
+    } else {
       reset({
         name: sampleUserData?.name,
         bio: sampleUserData?.bio,
@@ -53,7 +83,7 @@ export const ProfilePreview = () => {
         github: sampleUserData?.github,
       });
     }
-  }, [sampleUserData]);
+  }, [sampleUserData, userProfile]);
 
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(EditProfilePreviewUserSchema),
@@ -61,18 +91,21 @@ export const ProfilePreview = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+
     alert(JSON.stringify(data));
-    setSampleUserData({
-      name: data?.name,
-      avatar: sampleUserData?.avatar || "",
-      bgImg: sampleUserData?.bgImg || "",
-      follower: sampleUserData?.follower || 0,
-      following: sampleUserData?.following || 0,
-      bio: data?.bio,
-      location: data?.location,
-      portfolio: data?.portfolio,
-      github: data?.github,
-    });
+    if (!userProfile) {
+      setSampleUserData({
+        name: data?.name,
+        avatar: sampleUserData?.avatar || "",
+        bgImg: sampleUserData?.bgImg || "",
+        follower: sampleUserData?.follower || 0,
+        following: sampleUserData?.following || 0,
+        bio: data?.bio,
+        location: data?.location,
+        portfolio: data?.portfolio,
+        github: data?.github,
+      });
+    }
     setEditing(false);
   });
 
@@ -127,19 +160,6 @@ export const ProfilePreview = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Input
-                    name="portfolio"
-                    control={control}
-                    type="text"
-                    placeholder="Portfolio*"
-                    disable={false}
-                    inputHeadingType="Bold"
-                    inputHeadingLabelFontSize={12}
-                    inputHeadingLabel="Portfolio"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Input
                     name="github"
                     control={control}
                     type="text"
@@ -149,6 +169,18 @@ export const ProfilePreview = () => {
                     inputHeadingLabelFontSize={12}
                     inputHeadingLabel="GitHub"
                     required
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Input
+                    name="portfolio"
+                    control={control}
+                    type="text"
+                    placeholder="Portfolio*"
+                    disable={false}
+                    inputHeadingType="Bold"
+                    inputHeadingLabelFontSize={12}
+                    inputHeadingLabel="Portfolio"
                   />
                 </Grid>
               </Grid>
@@ -185,10 +217,12 @@ export const ProfilePreview = () => {
           <>
             <Grid item xs={12} mt={2}>
               <Typography textAlign="center" fontSize={14} fontWeight={500}>
-                {sampleUserData?.name}
+                {userProfile
+                  ? `${userProfile?.firstName} ${userProfile?.lastName}`
+                  : sampleUserData?.name}
               </Typography>
               <Typography pt={1} textAlign="center">
-                {sampleUserData?.bio}
+                {userProfile ? userProfile?.bio : sampleUserData?.bio}
               </Typography>
             </Grid>
             <Grid
@@ -230,27 +264,30 @@ export const ProfilePreview = () => {
             </Grid>
 
             <Grid item xs={12} mt={2}>
-              <Box
-                display="flex"
-                mb={0.5}
-                justifyContent="start"
-                alignItems="center"
-              >
+              <Grid item xs={12} display="flex" alignItems="center">
                 <LocationOnOutlinedIcon />
-                <Typography ml={1}>{sampleUserData?.location}</Typography>
-              </Box>
-              <Box display="flex" justifyContent="start" alignItems="center">
+                <Typography ml={1}>
+                  {userProfile
+                    ? userProfile?.location
+                    : sampleUserData?.location}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} mt={1} display="flex" alignItems="center">
+                <GitHubIcon sx={{ mr: 1 }} />
+                <Link
+                  href={
+                    userProfile
+                      ? userProfile?.github
+                      : sampleUserData?.github || ""
+                  }
+                >
+                  GitHub
+                </Link>
+              </Grid>
+              <Grid item xs={12} mt={1} display="flex" alignItems="center">
                 <LanguageOutlinedIcon sx={{ mr: 1 }} />
                 <Link href={sampleUserData?.portfolio || ""}>Portfolio</Link>
-              </Box>
-              <Box display="flex" justifyContent="start" alignItems="center">
-                <Avatar
-                  alt="github"
-                  src="/Images/github.png"
-                  sx={{ width: 20, height: 20, mr: 1, mt: 1 }}
-                />
-                <Link href={sampleUserData?.github || ""}>GitHub</Link>
-              </Box>
+              </Grid>
             </Grid>
           </>
         )}

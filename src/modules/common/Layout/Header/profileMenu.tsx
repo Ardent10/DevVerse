@@ -19,6 +19,7 @@ import { sxStyles } from "./index.styles";
 
 export default function AccountMenu() {
   const [state] = useAppState();
+  const [userFullName, setUserFullName] = React.useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,6 +36,14 @@ export default function AccountMenu() {
     await Logout();
   }
 
+  React.useEffect(() => {
+    if (state?.userProfile?.firstName && state?.userProfile?.lastName) {
+      setUserFullName(
+        state?.userProfile?.firstName + " " + state?.userProfile?.lastName
+      );
+    }
+  }, [state?.userProfile?.firstName, state?.userProfile?.lastName]);
+
   const router = useRouter();
 
   return (
@@ -49,7 +58,7 @@ export default function AccountMenu() {
           onClick={handleClick}
         >
           <Typography color="#8a89fa" fontWeight={600} p={1}>
-            {state?.userProfile?.firstName + " " + state?.userProfile?.lastName}
+            {userFullName? userFullName:""}
           </Typography>
           <IconButton
             size="small"

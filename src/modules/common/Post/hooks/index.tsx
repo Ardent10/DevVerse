@@ -57,6 +57,7 @@ export function usePost() {
               message: "Post Added Successfully",
             },
           });
+          await getPosts();
           router.push("/home");
         }
       }
@@ -77,9 +78,9 @@ export function usePost() {
       const res = await database.listDocuments(
         process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
         process.env.NEXT_PUBLIC_POSTS_COLLECTION_ID ?? "",
-        [Query.equal("userId", state?.userProfile?.$id)]
+        // [Query.equal("userId", state?.userProfile?.$id)]
+        [Query.orderDesc("$createdAt")]
       );
-
       if (res.documents) {
         const posts = res.documents;
 
@@ -125,73 +126,6 @@ export function usePost() {
     }
   };
 
-  // const getPosts = async () => {
-  //   try {
-  //     const res = await database.listDocuments(
-  //       process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-  //       process.env.NEXT_PUBLIC_POSTS_COLLECTION_ID ?? "",
-  //       [Query.equal("userId", state?.userProfile?.$id)]
-  //     );
-  //     if (res.documents) {
-  //       dispatch({
-  //         type: "setPosts",
-  //         payload: res.documents,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     dispatch({
-  //       type: "setToggleSnackbar",
-  //       payload: {
-  //         open: true,
-  //         severity: "error",
-  //         message: "Post Fetching Failed",
-  //       },
-  //     });
-  //   }
-  // };
-
-  // const getPosts = async () => {
-  //   try {
-  //     const res = await database.listDocuments(
-  //       process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-  //       process.env.NEXT_PUBLIC_POST_COLLECTION_ID ?? "",
-  //       [Query.equal("userId", state?.userProfile?.id)]
-  //     );
-
-  //     if (res.documents) {
-  //       const posts = res.documents;
-
-  //       // Iterate over the posts
-  //       for (const post of posts) {
-  //         // Access the post image ID
-  //         const postImageId = post.postImgId;
-
-  //         // Fetch the file details for the post image
-  //         const fileDetails = await storage.getFile(postImageId);
-
-  //         // Access the file URL from the file details
-  //         const imageUrl = fileDetails.$download;
-
-  //         // Add the imageURL property to the post object
-  //         post.imageURL = imageUrl;
-  //       }
-
-  //       dispatch({
-  //         type: "setPosts",
-  //         payload: posts,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     dispatch({
-  //       type: "setToggleSnackbar",
-  //       payload: {
-  //         open: true,
-  //         severity: "error",
-  //         message: "Post Fetching Failed",
-  //       },
-  //     });
-  //   }
-  // };
 
   return { addPost, getPosts, loading };
 }
