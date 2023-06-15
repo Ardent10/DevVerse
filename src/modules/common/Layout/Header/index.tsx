@@ -1,16 +1,15 @@
 import { CustomTooltip, SearchBar } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
-import BedtimeIcon from "@mui/icons-material/Bedtime";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import { Box, IconButton, Toolbar } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import { SearchSchema } from "@utils/validations";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { DarkMode } from "../../DarkMode";
 import { sxStyles } from "./index.styles";
 import ProfileMenu from "./profileMenu";
 
@@ -60,7 +59,12 @@ export default function Header(props: props) {
 
   return (
     <Box sx={styles.appBarBoxStyle}>
-      <AppBar id="header" position="fixed" open={props.open} sx={styles.appBarStyle}>
+      <AppBar
+        id="header"
+        position="fixed"
+        open={props.open}
+        sx={styles.appBarStyle}
+      >
         <Toolbar sx={styles.toolBarStyle}>
           <Box display="flex" justifyContent="center" alignItems="center">
             <IconButton
@@ -76,7 +80,7 @@ export default function Header(props: props) {
             </IconButton>
             <Link href="/" style={{ textDecoration: "none" }}>
               <Box display="flex" justifyContent="start" alignItems="center">
-                <img src="/DevVerse1.jpg" height={50} alt="DevVerse" />
+                <img src="/DevVerse-nobg.png" height={50} alt="DevVerse" />
               </Box>
             </Link>
           </Box>
@@ -98,18 +102,22 @@ export default function Header(props: props) {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            width={250}
+            width={260}
           >
-            <IconButton>
+            {/* <IconButton>
               <WbSunnyRoundedIcon sx={{ color: "#8a89fa" }} />
             </IconButton>
             <IconButton>
               <BedtimeIcon sx={{ color: "#8a89fa" }} />
-            </IconButton>
+            </IconButton> */}
+            <DarkMode />
 
             <CustomTooltip placement="bottom" label="⭐ Star on Github">
-              <IconButton href="https://github.com/Ardent10/DevVerse">
-                <GitHubIcon sx={{ color: "#000" }} />
+              <IconButton
+                size="medium"
+                href="https://github.com/Ardent10/DevVerse"
+              >
+                <GitHubIcon sx={{ color: "#000" }} fontSize="large" />
               </IconButton>
             </CustomTooltip>
 
