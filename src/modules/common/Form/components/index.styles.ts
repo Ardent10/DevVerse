@@ -79,17 +79,6 @@ export const sxStyles = (props: props) => {
     formBgGridStyle: {
       backgroundColor: "#f0f0f5",
     },
-    crosscopeImgStyle: {
-      maxWidth: "100%",
-      maxHeight: "100vh",
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat",
-      ObjectFit: "fil",
-    },
-    crosscopeImg: {
-      width: "100%",
-      height: 775,
-    },
 
     //For InputField
     giveLeftPaddingInputText: {
@@ -141,7 +130,7 @@ export const sxStyles = (props: props) => {
       height: "24px",
       fontWeight: props.fontWeight,
       fontSize: props.fontSize,
-      color: props.color,
+      color: props.color ? props.color : "#8a89fa",
       lineHeight: "24px",
       marginBottom: "5px",
       padding: "0",

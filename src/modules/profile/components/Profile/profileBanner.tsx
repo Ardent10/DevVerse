@@ -1,13 +1,6 @@
 import { useAppState } from "@/store";
 import { userProfilePreview } from "@/utils/SampleData/sampleData";
-import {
-  BasicCard,
-  Chips,
-  Input,
-  InputHeading,
-  PrimaryButton,
-  TextAreaInput,
-} from "@common/index";
+import { BasicCard, BasicModal, Chips, PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -19,6 +12,7 @@ import { chipsArray } from "@utils/SampleData/sampleData";
 import { EditProfilePreviewUserSchema } from "@utils/validations";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { EditProfiletModal } from "../EditProfile/editProfileModal";
 
 interface userProfilePreviewData {
   name: string;
@@ -37,7 +31,12 @@ export const Profile = () => {
   const [sampleUserData, setSampleUserData] =
     useState<userProfilePreviewData | null>(null);
   const [userProfile, setUserProfile] = useState<any>(null);
-  const [editing, setEditing] = useState(false);
+
+  const [OpenCreatePostModal, setCreateCaseModalOpen] = useState(false);
+
+  function toggleEditProfileModal() {
+    setCreateCaseModalOpen((oldState) => !oldState);
+  }
 
   useEffect(() => {
     if (state?.userProfile) {
@@ -110,122 +109,43 @@ export const Profile = () => {
         github: data?.github,
       });
     }
-    setEditing(false);
   });
   console.log(userProfile);
   return (
-    <Grid container>
-      <BasicCard
-        px={2}
-        py={1}
-        cardMediaheight={200}
-        cardMedia={sampleUserData?.bgImg}
-        position="relative"
+    <>
+      <BasicModal
+        width={600}
+        open={OpenCreatePostModal}
+        padding={0}
+        CloseModal={toggleEditProfileModal}
+        borderRadius={3}
+        backdropBackgroundColor="#EFEFE"
       >
-        <Grid container p={4}>
-          <Grid item height={50} position="absolute" top={140} left={40}>
-            <Avatar
-              alt="profile-icon"
-              src={sampleUserData?.avatar}
-              sx={{
-                width: 120,
-                height: 120,
-                borderRadius: "50%",
-                border: "5px solid #8a89fa",
-                bgcolor: "#FFF",
-              }}
-            />
-          </Grid>
-          {editing ? (
-            <form onSubmit={onSubmit}>
-              <Grid item xs={12}>
-                <Grid container rowSpacing={1}>
-                  <Grid item xs={12}>
-                    <Input
-                      name="name"
-                      control={control}
-                      type="text"
-                      placeholder="Name*"
-                      disable={false}
-                      inputHeadingType="Bold"
-                      inputHeadingLabelFontSize={12}
-                      inputHeadingLabel="Name"
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <InputHeading label="Bio" required fontSize={12} />
-                    <TextAreaInput name="bio" minRows={3} control={control} />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Input
-                      name="location"
-                      control={control}
-                      type="text"
-                      placeholder="Location*"
-                      disable={false}
-                      inputHeadingType="Bold"
-                      inputHeadingLabelFontSize={12}
-                      inputHeadingLabel="Location"
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Input
-                      name="github"
-                      control={control}
-                      type="text"
-                      placeholder="GitHub*"
-                      disable={false}
-                      inputHeadingType="Bold"
-                      inputHeadingLabelFontSize={12}
-                      inputHeadingLabel="GitHub"
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Input
-                      name="portfolio"
-                      control={control}
-                      type="text"
-                      placeholder="Portfolio*"
-                      disable={false}
-                      inputHeadingType="Bold"
-                      inputHeadingLabelFontSize={12}
-                      inputHeadingLabel="Portfolio"
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                display="flex"
-                columnGap={1}
-                justifyContent="start"
-                alignItems="start"
-                pt={2}
-              >
-                <PrimaryButton
-                  fontSize={11}
-                  title="Cancel"
-                  type="button"
-                  borderColor="1px solid #8a89fa"
-                  color="#8a89fa"
-                  onClick={() => setEditing(false)}
-                  padding={0}
-                />
-                <PrimaryButton
-                  padding={0}
-                  fontSize={11}
-                  title="Save"
-                  type="submit"
-                  borderColor="1px solid #8a89fa"
-                  backgroundColor="#8a89fa"
-                />
-              </Grid>
-            </form>
-          ) : (
+        <EditProfiletModal userProfile={userProfile} closeEditProfileModal={toggleEditProfileModal} />
+      </BasicModal>
+      <Grid container>
+        <BasicCard
+          px={2}
+          py={1}
+          cardMediaheight={350}
+          cardMedia={sampleUserData?.bgImg}
+          position="relative"
+        >
+          <Grid container p={4}>
+            <Grid item height={50} position="absolute" top={300} left={40}>
+              <Avatar
+                alt="profile-icon"
+                src={sampleUserData?.avatar}
+                sx={{
+                  width: 120,
+                  height: 120,
+                  borderRadius: "50%",
+                  border: "5px solid #8a89fa",
+                  bgcolor: "#FFF",
+                }}
+              />
+            </Grid>
+
             <>
               <Grid
                 item
@@ -233,7 +153,7 @@ export const Profile = () => {
                 display="flex"
                 flexDirection="row"
                 justifyContent="space-between"
-                alignItems="center"
+                alignItems="baseline"
                 xs={12}
                 mt={3}
                 width="100%"
@@ -287,7 +207,7 @@ export const Profile = () => {
                     width={180}
                     height={30}
                     disableElevation
-                    onClick={() => setEditing(true)}
+                    onClick={toggleEditProfileModal}
                     buttonChild={<EditIcon sx={{ mr: 1 }} fontSize="small" />}
                   />
                 </Grid>
@@ -344,120 +264,122 @@ export const Profile = () => {
                 </Grid>
               </Grid>
             </>
-          )}
-        </Grid>
-      </BasicCard>
-
-      <BasicCard px={2} py={1}>
-        <Grid container p={4}>
-          <Grid item xs={12}>
-            <Typography fontSize={20} fontWeight={500}>
-              About
-            </Typography>
           </Grid>
-          <Grid item xs={12} mt={2}>
-            <Typography fontSize={14} fontWeight={400}>
-              {userProfile ? userProfile?.about : sampleUserData?.bio}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} mt={2}>
-            <Typography fontSize={16} fontWeight={500}>
-              Location
-            </Typography>
+        </BasicCard>
 
-            <Grid
-              item
-              display="flex"
-              justifyContent="start"
-              alignItems="center"
-            >
-              <img
-                src={
-                  LocationJson.find(
-                    (location) => location.label === userProfile?.location
-                  )?.icon
-                }
-                style={{ width: 25, height: 25, marginRight: 5 }}
-                alt=""
-              />
-              <Typography fontSize={16} fontWeight={400}>
-                {userProfile ? userProfile?.location : sampleUserData?.location}
+        <BasicCard px={2} py={1}>
+          <Grid container p={4}>
+            <Grid item xs={12}>
+              <Typography fontSize={20} fontWeight={500}>
+                About
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Typography fontSize={14} fontWeight={400}>
+                {userProfile ? userProfile?.about : sampleUserData?.bio}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Typography fontSize={16} fontWeight={500}>
+                Location
+              </Typography>
+
+              <Grid
+                item
+                display="flex"
+                justifyContent="start"
+                alignItems="center"
+              >
+                <img
+                  src={
+                    LocationJson.find(
+                      (location) => location.label === userProfile?.location
+                    )?.icon
+                  }
+                  style={{ width: 25, height: 25, marginRight: 5 }}
+                  alt=""
+                />
+                <Typography fontSize={16} fontWeight={400}>
+                  {userProfile
+                    ? userProfile?.location
+                    : sampleUserData?.location}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </BasicCard>
+
+        <BasicCard px={2} py={1}>
+          <Grid container p={4}>
+            <Grid item xs={12}>
+              <Typography fontSize={20} fontWeight={500}>
+                Skills
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Chips chipsArray={state.tags ? state.tags : chipsArray} />
+            </Grid>
+          </Grid>
+        </BasicCard>
+
+        <BasicCard px={2} py={1}>
+          <Grid container p={4}>
+            <Grid item xs={12}>
+              <Typography fontSize={20} fontWeight={500}>
+                Experience
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Typography fontSize={16} fontWeight={500}>
+                Software Engineer Intern
+              </Typography>
+              <Typography fontSize={14} fontWeight={400}>
+                Appwrite
+              </Typography>
+              <Typography fontSize={14} fontWeight={400}>
+                2021 - Present
+              </Typography>
+              <Divider />
+            </Grid>
+          </Grid>
+        </BasicCard>
+
+        <BasicCard px={2} py={1}>
+          <Grid container p={4}>
+            <Grid item xs={12}>
+              <Typography fontSize={20} fontWeight={500}>
+                Education
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Typography fontSize={16} fontWeight={500}>
+                University of California, Los Angeles
+              </Typography>
+              <Typography fontSize={14} fontWeight={400}>
+                Bachelor of Science in Computer Science
+              </Typography>
+              <Typography fontSize={14} fontWeight={400}>
+                2020 - 2024
               </Typography>
             </Grid>
           </Grid>
-        </Grid>
-      </BasicCard>
+        </BasicCard>
 
-      <BasicCard px={2} py={1}>
-        <Grid container p={4}>
-          <Grid item xs={12}>
-            <Typography fontSize={20} fontWeight={500}>
-              Skills
-            </Typography>
+        <BasicCard px={2} py={1}>
+          <Grid container p={4}>
+            <Grid item xs={12}>
+              <Typography fontSize={20} fontWeight={500}>
+                Languages
+              </Typography>
+            </Grid>
+            <Grid item xs={12} mt={2}>
+              <Typography fontSize={16} fontWeight={400}>
+                English , Hindi , Spanish , French.
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={12} mt={2}>
-            <Chips chipsArray={state.tags ? state.tags : chipsArray} />
-          </Grid>
-        </Grid>
-      </BasicCard>
-
-      <BasicCard px={2} py={1}>
-        <Grid container p={4}>
-          <Grid item xs={12}>
-            <Typography fontSize={20} fontWeight={500}>
-              Experience
-            </Typography>
-          </Grid>
-          <Grid item xs={12} mt={2}>
-            <Typography fontSize={16} fontWeight={500}>
-              Software Engineer Intern
-            </Typography>
-            <Typography fontSize={14} fontWeight={400}>
-              Appwrite
-            </Typography>
-            <Typography fontSize={14} fontWeight={400}>
-              2021 - Present
-            </Typography>
-            <Divider />
-          </Grid>
-        </Grid>
-      </BasicCard>
-
-      <BasicCard px={2} py={1}>
-        <Grid container p={4}>
-          <Grid item xs={12}>
-            <Typography fontSize={20} fontWeight={500}>
-              Education
-            </Typography>
-          </Grid>
-          <Grid item xs={12} mt={2}>
-            <Typography fontSize={16} fontWeight={500}>
-              University of California, Los Angeles
-            </Typography>
-            <Typography fontSize={14} fontWeight={400}>
-              Bachelor of Science in Computer Science
-            </Typography>
-            <Typography fontSize={14} fontWeight={400}>
-              2020 - 2024
-            </Typography>
-          </Grid>
-        </Grid>
-      </BasicCard>
-
-      <BasicCard px={2} py={1}>
-        <Grid container p={4}>
-          <Grid item xs={12}>
-            <Typography fontSize={20} fontWeight={500}>
-              Languages
-            </Typography>
-          </Grid>
-          <Grid item xs={12} mt={2}>
-            <Typography fontSize={16} fontWeight={400}>
-              English , Hindi , Spanish , French.
-            </Typography>
-          </Grid>
-        </Grid>
-      </BasicCard>
-    </Grid>
+        </BasicCard>
+      </Grid>
+    </>
   );
 };

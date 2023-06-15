@@ -37,6 +37,10 @@ export const ColorModeContextProvider = ({ children }: any) => {
         },
         palette: {
           mode,
+          text: {
+            primary: mode === "dark" ? "#fff" : "#000",
+            secondary: mode === "dark" ? "#fff" : "#000",
+          },
           primary: {
             main: "#FFFFE",
           },

@@ -48,11 +48,25 @@ const AddNewTagSchema = yup.object().shape({
   tag: yup.string().required(Messages.Tags.required),
 });
 
+const EditUserProfileSchema = yup.object().shape({
+  firstName: yup.string().required(Messages.FirstName.required),
+  lastName: yup.string().required(Messages.LastName.required),
+  bio: yup.string().required(Messages.Bio.required),
+  email: yup.string().email().required(Messages.Email.required),
+  location: yup.string().required(Messages.Location.required),
+  github: yup.string().required(Messages.Github.required),
+  portfolio: yup.string(),
+  about: yup.string().required(Messages.About.required),
+  skills: yup.array().required(Messages.Skills.required),
+  languages: yup.array().required(Messages.Languages.required),
+});
+
 export {
+  AddNewTagSchema,
   EditProfilePreviewUserSchema,
   LoginSchema,
   NewPostSchema,
   SearchSchema,
   SignupSchema,
-  AddNewTagSchema,
+  EditUserProfileSchema,
 };

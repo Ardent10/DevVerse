@@ -1,4 +1,4 @@
-# DeVverse
+# DevVerse
 
 DeVverse is a social media platform for developers. It provides a platform for developers to connect with each other, create new posts, chat with other developers, and customize their user settings.
 
@@ -6,9 +6,12 @@ DeVverse is a social media platform for developers. It provides a platform for d
 
 - User Registration: Developers can create an account on DeVverse by providing their required details.
 - Post Creation: Users can create new posts to share their thoughts, ideas, or code snippets with the developer community.
-- User Connections: Developers can connect with other developers, follow their activities, and build their network.
-- Chat Functionality: DeVverse offers a chat feature that allows developers to communicate with each other privately.
-- User Settings: Users can customize their profile and account settings according to their preferences.
+- Profile: Users can visit their profile to Edit their infromation.
+- Tags: Users can add New Tags which is an alternative of hastags.
+- Event: User can create new Events and see the upcoming list of events.
+<!-- - User Connections: Developers can connect with other developers, follow their activities, and build their network. -->
+<!-- - Chat Functionality: DeVverse offers a chat feature that allows developers to communicate with each other privately. -->
+<!-- - User Settings: Users can customize their profile and account settings according to their preferences. -->
 
 ## Technologies Used
 

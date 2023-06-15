@@ -30,7 +30,7 @@ export const sxStyles = (props: Props) => {
       padding: 0,
       backgroundColor: props.backgroundColor
         ? props.backgroundColor
-        : "#ECF0F4",
+        : "#FFF",
       ".Mui-disabled": {
         backgroundColor: "rgb(107, 115, 122)",
         color: "#FFFF",

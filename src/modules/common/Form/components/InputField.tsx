@@ -123,7 +123,7 @@ export const Input = ({
                     color={
                       inputHeadingLabelColor
                         ? inputHeadingLabelColor
-                        : "#25265e"
+                        : "#8a89fa"
                     }
                   />
                 )}

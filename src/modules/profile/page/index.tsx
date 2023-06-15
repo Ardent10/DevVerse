@@ -18,7 +18,6 @@ export function ProfileScreen() {
       >
         <Grid item xs={9}>
           <Profile />
-          {/* <Post postData={postData} /> */}
         </Grid>
       </Grid>
     </Layout>
