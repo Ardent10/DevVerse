@@ -1,36 +1,25 @@
-import { useAuth } from "@/modules/authentication/hooks";
 import { AddPost } from "@/modules/common/Post/components";
 import { usePost } from "@/modules/common/Post/hooks";
 import { useAppState } from "@/store";
 import { BasicModal } from "@common/Modal";
-import { BasicCard, Chips, Layout, Post, ProfilePreview } from "@common/index";
-import { Avatar, Box, Grid, Typography } from "@mui/material";
-import {
-  chipsArray,
-  eventsArray,
-  postData,
-} from "@utils/SampleData/sampleData";
+import { BasicCard, Layout, Post, ProfilePreview } from "@common/index";
+import { Avatar, Box, Grid, MenuItem, Typography } from "@mui/material";
+import { eventsArray, postData } from "@utils/SampleData/sampleData";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CreatePostModal } from "../components/createPostModal";
+import { CreateTags } from "../components/createTags";
 
 const HomeScreen: NextPage = () => {
   const [state] = useAppState();
   const [OpenCreatePostModal, setCreateCaseModalOpen] = useState(false);
+
+  const { getPosts } = usePost();
+
   function toggleCreatePostModal() {
     setCreateCaseModalOpen((oldState) => !oldState);
   }
-
-  const { getAccount } = useAuth();
-  const { getPosts } = usePost();
-
-  useEffect(() => {
-    const fetchAccount = async () => {
-      await getAccount();
-    };
-    fetchAccount();
-  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -71,30 +60,30 @@ const HomeScreen: NextPage = () => {
           <Grid item xs={3}>
             <Grid container rowSpacing={2}>
               <Grid item xs={12}>
-                <BasicCard title="Popular Tags" px={2}>
-                  <Chips chipsArray={chipsArray} />
-                </BasicCard>
+                <CreateTags />
               </Grid>
               <Grid item xs={12}>
-                <BasicCard title="Upcoming Events" px={2} py={0}>
+                <BasicCard title="Upcoming Events" divider px={2} py={0}>
                   {eventsArray.map((e) => (
-                    <Box
-                      display="flex"
-                      justifyContent="start"
-                      alignItems="center"
-                      key={e.key}
-                      my={2}
-                    >
-                      <Box mr={2}>
-                        <Avatar src={e.icon} />
+                    <MenuItem key={e.key}>
+                      <Box
+                        display="flex"
+                        justifyContent="start"
+                        alignItems="center"
+                        key={e.key}
+                        my={2}
+                      >
+                        <Box mr={2}>
+                          <Avatar src={e.icon} />
+                        </Box>
+                        <Box>
+                          <Typography fontSize={16} fontWeight={500}>
+                            {e.label}
+                          </Typography>
+                          <Typography>{e.date}</Typography>
+                        </Box>
                       </Box>
-                      <Box>
-                        <Typography fontSize={16} fontWeight={500}>
-                          {e.label}
-                        </Typography>
-                        <Typography>{e.date}</Typography>
-                      </Box>
-                    </Box>
+                    </MenuItem>
                   ))}
                 </BasicCard>
               </Grid>

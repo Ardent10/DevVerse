@@ -1,3 +1,4 @@
+import { useAuth } from "@/modules/authentication/hooks";
 import { useAppState } from "@/store";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -126,11 +127,19 @@ const Drawer = styled(MuiDrawer, {
 
 export function Layout(props: props) {
   const [state, dispatch] = useAppState();
+  const { getAccount } = useAuth();
   const { globalReducer } = state;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchAccount = async () => {
+      await getAccount();
+    };
+    fetchAccount();
+  }, []);
 
   useEffect(() => {
     dispatch({
@@ -190,7 +199,7 @@ export function Layout(props: props) {
 
           <Sidebar open={open} menuItems={menuItems} />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box component="main" sx={{ flexGrow: 1, width:"100%" }}>
           {state?.isLoading ? <Loader /> : props.children}
         </Box>
       </Box>

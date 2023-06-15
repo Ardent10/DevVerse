@@ -23,7 +23,7 @@ export default function Sidebar(props: props) {
   return (
     <List sx={{ pt: 2 }}>
       {props.menuItems.map((item) => (
-        <Link key={item.id} href={item.link}>
+        <Link key={item.id} href={item.link} style={{color:"#8a89fa"}}>
           <ListItem
             key={item.id}
             disablePadding

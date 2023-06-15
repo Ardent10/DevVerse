@@ -1,12 +1,16 @@
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  Divider,
   Grid,
   Typography,
 } from "@mui/material";
+import { PrimaryButton } from "../PrimaryButton";
 
 interface props {
   height?: number;
@@ -20,6 +24,12 @@ interface props {
   cardAction?: boolean;
   cardMedia?: string;
   cardMediaheight?: number;
+  divider?: boolean;
+  buttonOnHeader?: boolean;
+  btnOnClick?: any;
+  btnLabel?: string;
+  btnDisabled?: boolean;
+  btnType?:string;
 }
 
 export function BasicCard(props: props) {
@@ -41,10 +51,32 @@ export function BasicCard(props: props) {
             />
           )}
           <CardContent>
-            <Typography sx={{ fontSize: 22, fontWeight: 400 }} gutterBottom>
-              {props.title}
-            </Typography>
-
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Typography sx={{ fontSize: 22, fontWeight: 500 }} gutterBottom>
+                {props.title}
+              </Typography>
+              {props.buttonOnHeader && (
+                <PrimaryButton
+                  title={props?.btnLabel ? props.btnLabel : ""}
+                  type={props.btnType}
+                  borderColor="1px solid #8a89fa"
+                  backgroundColor="#8a89fa"
+                  fontSize={12}
+                  fontWeight={500}
+                  width={110}
+                  height={30}
+                  disableElevation
+                  buttonChild={<LocalOfferIcon fontSize="small" />}
+                  onClick={props.btnOnClick}
+                  disabled={props.btnDisabled}
+                />
+              )}
+            </Box>
+            {props.divider && <Divider />}
             {props.children}
           </CardContent>
           {props.cardAction && (

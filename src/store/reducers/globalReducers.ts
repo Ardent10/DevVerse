@@ -35,6 +35,12 @@ const globalReducers = (state: State, action: Action) => {
         posts: action.payload,
       };
     }
+    case "setTags": {
+      return {
+        ...state,
+        tags: action.payload,
+      };
+    }
     case "setIsLoading": {
       return {
         ...state,

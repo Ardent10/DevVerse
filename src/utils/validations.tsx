@@ -44,10 +44,15 @@ const EditProfilePreviewUserSchema = yup.object().shape({
   github: yup.string().required(Messages.Github.required),
 });
 
+const AddNewTagSchema = yup.object().shape({
+  tag: yup.string().required(Messages.Tags.required),
+});
+
 export {
   EditProfilePreviewUserSchema,
   LoginSchema,
   NewPostSchema,
   SearchSchema,
   SignupSchema,
+  AddNewTagSchema,
 };

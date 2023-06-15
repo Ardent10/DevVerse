@@ -5,7 +5,8 @@ export const initialState = {
     severity: "error",
     message: "",
   },
-  userProfile:null,
+  userProfile: null,
   posts: [],
   isLoading: false,
+  tags:null,
 };

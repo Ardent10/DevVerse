@@ -1,20 +1,23 @@
-import { AddPost } from "@/modules/common/Post/components";
-import { Layout, Post } from "@common/index";
+import { Layout } from "@common/index";
 import { Grid } from "@mui/material";
-import { postData } from "@utils/SampleData/sampleData";
-import { ProfileBanner } from "../components/profileBanner";
+import { Profile } from "../components/Profile/profileBanner";
 
 export function ProfileScreen() {
   return (
-    <>
-      <Layout>
-        <Grid container justifyContent="center" bgcolor="#f7f7f7" pt={10}>
-          <Grid item xs={8}>
-            <ProfileBanner />
-            <Post postData={postData} />
-          </Grid>
+    <Layout>
+      <Grid
+        container
+        justifyContent="center"
+        bgcolor="#f7f7f7"
+        minHeight="100vh"
+        width="100%"
+        pt={13}
+      >
+        <Grid item xs={9}>
+          <Profile />
+          {/* <Post postData={postData} /> */}
         </Grid>
-      </Layout>
-    </>
+      </Grid>
+    </Layout>
   );
 }

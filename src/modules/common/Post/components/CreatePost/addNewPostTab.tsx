@@ -86,42 +86,38 @@ const tags = [
   },
   {
     id: 11,
-    label: "NewLabel",
-  },
-  {
-    id: 12,
     label: "Node.js",
   },
   {
-    id: 13,
+    id: 12,
     label: "Express.js",
   },
   {
-    id: 14,
+    id: 13,
     label: "MongoDB",
   },
   {
-    id: 15,
+    id: 14,
     label: "Python",
   },
   {
-    id: 16,
+    id: 15,
     label: "Docker",
   },
   {
-    id: 17,
+    id: 16,
     label: "Kubernetes",
   },
   {
-    id: 18,
+    id: 17,
     label: "AWS",
   },
   {
-    id: 19,
+    id: 18,
     label: "GraphQL",
   },
   {
-    id: 20,
+    id: 19,
     label: "Vue.js",
   },
 ];

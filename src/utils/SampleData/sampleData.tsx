@@ -1,6 +1,6 @@
 // 1. Home Page
 interface chipsData {
-  key: number;
+  key: number | string;
   label: string;
 }
 
@@ -104,7 +104,7 @@ export const postData = [
 // 3. Profile Preview Component
 export const userProfilePreview = {
   name: "Zakariya Khan",
-  avatar: "Images/boy.png",
+  avatar: "Images/boy.webp",
   bgImg: "/Images/background.png",
   bio: "• Aspiring GSoC mentee 2023 • KubeCon22' | • Top Contributor @OpenForce22 | • Open Source Enthusiast | HacktoberFest21'22' | • Ardent Learner & Writer",
   follower: 50,

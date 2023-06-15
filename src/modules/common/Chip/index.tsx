@@ -1,6 +1,7 @@
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import * as React from "react";
+import { chipsArray } from "@utils/SampleData/sampleData";
 
 interface ChipData {
   key: number | string;

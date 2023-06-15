@@ -154,7 +154,7 @@ export function useAuth() {
             ...usersRes.documents[0],
           },
         });
-        router.push("/home");
+        // router.push("/home");
       } else {
         router.push("/");
       }

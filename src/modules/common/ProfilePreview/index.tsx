@@ -4,9 +4,9 @@ import { BasicCard, PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import { Avatar, Grid, Typography } from "@mui/material";
+import LocationJson from "@utils/SampleData/location.json";
 import { EditProfilePreviewUserSchema } from "@utils/validations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -44,18 +44,16 @@ export const ProfilePreview = () => {
         location: state.userProfile.location,
         github: state.userProfile.github,
         portfolio: state.userProfile.portfolio,
-        bio: state.userProfile.about,
+        bio: state.userProfile.bio,
 
         avatar: state.userProfile.avatar,
         bgImg: state.userProfile.bgImg,
         follower: state.userProfile.follower,
         following: state.userProfile.following,
       });
-    } else {
-      setSampleUserData(userProfilePreview);
     }
+    setSampleUserData(userProfilePreview);
   }, [state.userProfile]);
-  console.log("userProfile", userProfile);
 
   const defaultValues = {
     name: "",
@@ -91,7 +89,6 @@ export const ProfilePreview = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-
     alert(JSON.stringify(data));
     if (!userProfile) {
       setSampleUserData({
@@ -121,7 +118,13 @@ export const ProfilePreview = () => {
           <Avatar
             alt="profile-icon"
             src={sampleUserData?.avatar}
-            sx={{ width: 56, height: 56 }}
+            sx={{
+              width: 56,
+              height: 56,
+              borderRadius: "50%",
+              border: "3px solid #8a89fa",
+              bgcolor: "#FFF",
+            }}
           />
         </Grid>
         {editing ? (
@@ -265,7 +268,16 @@ export const ProfilePreview = () => {
 
             <Grid item xs={12} mt={2}>
               <Grid item xs={12} display="flex" alignItems="center">
-                <LocationOnOutlinedIcon />
+                <img
+                  src={
+                    LocationJson.find(
+                      (location) => location.label === userProfile?.location
+                    )?.icon
+                  }
+                  style={{ width: 20, height: 20 }}
+                  alt=""
+                />
+
                 <Typography ml={1}>
                   {userProfile
                     ? userProfile?.location
