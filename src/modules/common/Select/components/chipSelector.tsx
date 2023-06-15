@@ -19,7 +19,7 @@ const MenuProps = {
 };
 
 type data = {
-  id: number;
+  id?: number;
   label: string;
 };
 
@@ -160,9 +160,9 @@ export function ChipSelector({
                 )}
                 MenuProps={MenuProps}
               >
-                {data.map((d) => (
+                {data.map((d, idx) => (
                   <MenuItem
-                    key={d.id}
+                    key={d.id ? d.id : idx}
                     value={d.label}
                     sx={styles.selectedStyle}
                   >

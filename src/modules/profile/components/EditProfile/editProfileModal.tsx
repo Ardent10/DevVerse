@@ -1,4 +1,3 @@
-import { UploadImageTab } from "@/modules/common/Post/components";
 import { usePost } from "@/modules/common/Post/hooks";
 import { GlobalTabs } from "@/modules/common/Tabs";
 import { useAppState } from "@/store";
@@ -8,7 +7,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { UploadImageTab } from "../EditProfile/Tabs/upload";
 import { About } from "./Tabs/about";
+import { Qualifications } from "./Tabs/qualifications";
 import { UserPersonalDetails } from "./Tabs/userPersonalDetails";
 
 interface tab {
@@ -58,6 +59,7 @@ export function EditProfiletModal(props: props) {
     portfolio: props.userProfile?.portfolio || "",
     about: props.userProfile?.about || "",
     skills: props.userProfile?.skills || [],
+    languages: props.userProfile?.languages || [],
   };
 
   const {
@@ -100,8 +102,11 @@ export function EditProfiletModal(props: props) {
     let email = getValues("email");
     let github = getValues("github");
     let portfolio = getValues("portfolio");
+
     let about = getValues("about");
     let skills = getValues("skills");
+    let languages = getValues("languages");
+
     setUserDetails({
       firstName,
       lastName,
@@ -157,6 +162,26 @@ export function EditProfiletModal(props: props) {
       id: 3,
       value: 3,
       index: 3,
+      label: "Qualifications",
+      panel: (
+        <Qualifications
+          CloseModal={props.closeEditProfileModal}
+          control={control}
+          formData={formData}
+          JumpToTab={JumpToTab}
+          onNextClick={onNextClick}
+          resetForm={reset}
+          setValue={setValue}
+          userData={userData}
+          isDirty={isDirty}
+          // errorMsg={errorMsg}
+        />
+      ),
+    },
+    {
+      id: 4,
+      value: 4,
+      index: 4,
       label: "Upload",
       panel: (
         <UploadImageTab
@@ -216,7 +241,7 @@ export function EditProfiletModal(props: props) {
         selectedtabBgColor="#fff"
         fontWeight={700}
         minHeight={28}
-        minWidth={130}
+        minWidth={150}
       />
     </Box>
   );

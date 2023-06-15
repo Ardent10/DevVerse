@@ -18,15 +18,8 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth } from "../hooks";
 
-interface CountryData {
-  name: string;
-  flag: string;
-  [key: string]: any;
-}
-
 export function SignupScreen() {
   const { Signup } = useAuth();
-  const [countries, setCountries] = useState<CountryData[]>([]);
   const [state, dispatch] = useAppState();
   const [openSnackbar, setOpenSnackbar] = useState({
     open: false,

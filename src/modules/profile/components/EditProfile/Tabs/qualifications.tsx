@@ -99,7 +99,7 @@ const tags = [
   },
 ];
 
-export function About({
+export function Qualifications({
   CloseModal,
   onNextClick,
   JumpToTab,
@@ -158,7 +158,7 @@ export function About({
                   height={45}
                   width={90}
                   onClick={() => {
-                    JumpToTab(1);
+                    JumpToTab(2);
                   }}
                 />
               </Grid>
@@ -173,7 +173,7 @@ export function About({
                 width={90}
                 onClick={() => {
                   onNextClick();
-                  JumpToTab(3);
+                  JumpToTab(4);
                 }}
               />
             </Grid>

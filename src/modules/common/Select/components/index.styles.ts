@@ -86,6 +86,7 @@ export const sxStyles = (props: Props) => {
       },
     },
     selectedStyle: {
+      my:0.5,
       "&.Mui-selected": {
         backgroundColor: "#8a89fa",
         color: "#FFFF",

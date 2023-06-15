@@ -1,6 +1,6 @@
 import { useAppState } from "@/store";
 import { userProfilePreview } from "@/utils/SampleData/sampleData";
-import { BasicCard, PrimaryButton } from "@common/index";
+import { BasicCard,PrimaryButton } from "@common/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
@@ -11,8 +11,7 @@ import { EditProfilePreviewUserSchema } from "@utils/validations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputHeading, TextAreaInput } from "../Form";
-import { Input } from "../Form/components/InputField";
+import { useRouter } from "next/router";
 
 interface userProfilePreviewData {
   name: string;
@@ -31,7 +30,7 @@ export const ProfilePreview = () => {
   const [sampleUserData, setSampleUserData] =
     useState<userProfilePreviewData | null>(null);
   const [userProfile, setUserProfile] = useState<any>(null);
-  const [editing, setEditing] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (state.userProfile) {
@@ -103,7 +102,6 @@ export const ProfilePreview = () => {
         github: data?.github,
       });
     }
-    setEditing(false);
   });
 
   return (
@@ -127,182 +125,89 @@ export const ProfilePreview = () => {
             }}
           />
         </Grid>
-        {editing ? (
-          <form onSubmit={onSubmit}>
-            <Grid item xs={12}>
-              <Grid container rowSpacing={1}>
-                <Grid item xs={12}>
-                  <Input
-                    name="name"
-                    control={control}
-                    type="text"
-                    placeholder="Name*"
-                    disable={false}
-                    inputHeadingType="Bold"
-                    inputHeadingLabelFontSize={12}
-                    inputHeadingLabel="Name"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <InputHeading label="Bio" required fontSize={12} />
-                  <TextAreaInput name="bio" minRows={3} control={control} />
-                </Grid>
-                <Grid item xs={12}>
-                  <Input
-                    name="location"
-                    control={control}
-                    type="text"
-                    placeholder="Location*"
-                    disable={false}
-                    inputHeadingType="Bold"
-                    inputHeadingLabelFontSize={12}
-                    inputHeadingLabel="Location"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Input
-                    name="github"
-                    control={control}
-                    type="text"
-                    placeholder="GitHub*"
-                    disable={false}
-                    inputHeadingType="Bold"
-                    inputHeadingLabelFontSize={12}
-                    inputHeadingLabel="GitHub"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Input
-                    name="portfolio"
-                    control={control}
-                    type="text"
-                    placeholder="Portfolio*"
-                    disable={false}
-                    inputHeadingType="Bold"
-                    inputHeadingLabelFontSize={12}
-                    inputHeadingLabel="Portfolio"
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              display="flex"
-              columnGap={1}
-              justifyContent="start"
-              alignItems="start"
-              pt={2}
-            >
-              <PrimaryButton
-                fontSize={11}
-                title="Cancel"
-                type="button"
-                borderColor="1px solid #8a89fa"
-                color="#8a89fa"
-                onClick={() => setEditing(false)}
-                padding={0}
-              />
-              <PrimaryButton
-                padding={0}
-                fontSize={11}
-                title="Save"
-                type="submit"
-                borderColor="1px solid #8a89fa"
-                backgroundColor="#8a89fa"
-              />
-            </Grid>
-          </form>
-        ) : (
-          <>
-            <Grid item xs={12} mt={2}>
-              <Typography textAlign="center" fontSize={14} fontWeight={500}>
-                {userProfile
-                  ? `${userProfile?.firstName} ${userProfile?.lastName}`
-                  : sampleUserData?.name}
-              </Typography>
-              <Typography pt={1} textAlign="center">
-                {userProfile ? userProfile?.bio : sampleUserData?.bio}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              mt={1}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <PeopleOutlinedIcon />
-              <Typography fontSize={12}>
-                {sampleUserData?.follower} Followers &nbsp;
-              </Typography>
-              <Typography fontSize={12}>
-                • {sampleUserData?.following} Following
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              mt={2}
-            >
-              <PrimaryButton
-                title="Edit Profile"
-                type="button"
-                borderColor="1px solid #8a89fa"
-                backgroundColor="#8a89fa"
-                fontSize={12}
-                fontWeight={500}
-                width={180}
-                height={30}
-                disableElevation
-                onClick={() => setEditing(true)}
-              />
-            </Grid>
+        <>
+          <Grid item xs={12} mt={2}>
+            <Typography textAlign="center" fontSize={14} fontWeight={500}>
+              {userProfile
+                ? `${userProfile?.firstName} ${userProfile?.lastName}`
+                : sampleUserData?.name}
+            </Typography>
+            <Typography pt={1} textAlign="center">
+              {userProfile ? userProfile?.bio : sampleUserData?.bio}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            mt={1}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <PeopleOutlinedIcon />
+            <Typography fontSize={12}>
+              {sampleUserData?.follower} Followers &nbsp;
+            </Typography>
+            <Typography fontSize={12}>
+              • {sampleUserData?.following} Following
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={2}
+          >
+            <PrimaryButton
+              title="Go to Profile"
+              type="button"
+              borderColor="1px solid #8a89fa"
+              backgroundColor="#8a89fa"
+              fontSize={12}
+              fontWeight={500}
+              width={180}
+              height={30}
+              disableElevation
+              onClick={() => router.push("/profile")}
+            />
+          </Grid>
 
-            <Grid item xs={12} mt={2}>
-              <Grid item xs={12} display="flex" alignItems="center">
-                <img
-                  src={
-                    LocationJson.find(
-                      (location) => location.label === userProfile?.location
-                    )?.icon
-                  }
-                  style={{ width: 20, height: 20 }}
-                  alt=""
-                />
+          <Grid item xs={12} mt={2}>
+            <Grid item xs={12} display="flex" alignItems="center">
+              <img
+                src={
+                  LocationJson.find(
+                    (location) => location.label === userProfile?.location
+                  )?.icon
+                }
+                style={{ width: 20, height: 20 }}
+                alt=""
+              />
 
-                <Typography ml={1}>
-                  {userProfile
-                    ? userProfile?.location
-                    : sampleUserData?.location}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} mt={1} display="flex" alignItems="center">
-                <GitHubIcon sx={{ mr: 1 }} />
-                <Link
-                  href={
-                    userProfile
-                      ? userProfile?.github
-                      : sampleUserData?.github || ""
-                  }
-                >
-                  GitHub
-                </Link>
-              </Grid>
-              <Grid item xs={12} mt={1} display="flex" alignItems="center">
-                <LanguageOutlinedIcon sx={{ mr: 1 }} />
-                <Link href={sampleUserData?.portfolio || ""}>Portfolio</Link>
-              </Grid>
+              <Typography ml={1}>
+                {userProfile ? userProfile?.location : sampleUserData?.location}
+              </Typography>
             </Grid>
-          </>
-        )}
+            <Grid item xs={12} mt={1} display="flex" alignItems="center">
+              <GitHubIcon sx={{ mr: 1 }} />
+              <Link
+                href={
+                  userProfile
+                    ? userProfile?.github
+                    : sampleUserData?.github || ""
+                }
+              >
+                GitHub
+              </Link>
+            </Grid>
+            <Grid item xs={12} mt={1} display="flex" alignItems="center">
+              <LanguageOutlinedIcon sx={{ mr: 1 }} />
+              <Link href={sampleUserData?.portfolio || ""}>Portfolio</Link>
+            </Grid>
+          </Grid>
+        </>
       </Grid>
     </BasicCard>
   );
