@@ -72,7 +72,7 @@ export const AddPost = ({ toggleCreatePostModal }: any) => {
               />
             </Grid>
           </Grid>
-          <Divider />
+          {/* <Divider /> */}
           <Grid
             item
             pt={1}
@@ -81,7 +81,7 @@ export const AddPost = ({ toggleCreatePostModal }: any) => {
             justifyContent="space-between"
             alignItems="center"
           >
-            {postOptions.map((option) => (
+            {/* {postOptions.map((option) => (
               <PrimaryButton
                 key={option.id}
                 title=""
@@ -100,7 +100,7 @@ export const AddPost = ({ toggleCreatePostModal }: any) => {
                   </>
                 }
               />
-            ))}
+            ))} */}
           </Grid>
         </CardContent>
       </Card>
