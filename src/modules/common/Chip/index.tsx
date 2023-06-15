@@ -53,6 +53,7 @@ export function Chips(props: Props) {
         listStyle: "none",
         m: 0,
         p: 0,
+        bgcolor:"transparent",
       }}
       component="ul"
       elevation={0}

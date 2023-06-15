@@ -15,11 +15,12 @@ import IconButton from "@mui/material/IconButton";
 import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import { Loader } from "../Loder";
 import { CustomSnackbar } from "../Snackbar";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { ColorModeContext } from "../DarkMode";
 
 const drawerWidth = 240;
 
@@ -27,55 +28,6 @@ interface props {
   children: any;
   menuItems?: Array<any>;
 }
-
-const menuItems = [
-  {
-    id: 1,
-    title: "Home",
-    icon: <HomeIcon />,
-    link: "/home",
-  },
-  {
-    id: 2,
-    title: "Notifications",
-    icon: (
-      <Badge color="secondary" badgeContent={5}>
-        <NotificationsIcon />
-      </Badge>
-    ),
-    link: "/notifications",
-  },
-  {
-    id: 3,
-    title: "Friends",
-    icon: <PeopleAltIcon />,
-    link: "/friends",
-  },
-  {
-    id: 4,
-    title: "Bookmarks",
-    icon: <BookmarkIcon />,
-    link: "/bookmarks",
-  },
-  {
-    id: 5,
-    title: "Events",
-    icon: <WhatshotIcon />,
-    link: "/events",
-  },
-  {
-    id: 6,
-    title: "Profile",
-    icon: <AccountCircleIcon />,
-    link: "/profile",
-  },
-  {
-    id: 7,
-    title: "User Settings",
-    icon: <ManageAccountsIcon />,
-    link: "/user-settings",
-  },
-];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -131,6 +83,7 @@ export function Layout(props: props) {
   const { globalReducer } = state;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const {mode } = useContext(ColorModeContext);
 
   const router = useRouter();
 
@@ -178,8 +131,14 @@ export function Layout(props: props) {
         horizontal="right"
       />
       <Box sx={{ display: "flex" }}>
-        <Header open={open} handleOpenDrawer={handleDrawerOpen} />
-        <Drawer variant="permanent" open={open}>
+        <Header open={open} handleOpenDrawer={handleDrawerOpen} mode={mode} />
+        <Drawer
+          variant="permanent"
+          open={open}
+          sx={{
+            borderRight: mode === "dark" ? "1px solid #8a89fa" : "#FFFE",
+          }}
+        >
           <DrawerHeader
             id="Drawer-header"
             minHeight={10}
@@ -197,9 +156,9 @@ export function Layout(props: props) {
             </IconButton>
           </DrawerHeader>
 
-          <Sidebar open={open} menuItems={menuItems} />
+          <Sidebar open={open} mode={mode} />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, width:"100%" }}>
+        <Box component="main" sx={{ flexGrow: 1, width: "100%" }}>
           {state?.isLoading ? <Loader /> : props.children}
         </Box>
       </Box>

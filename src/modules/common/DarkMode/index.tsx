@@ -31,6 +31,10 @@ export const ColorModeContextProvider = ({ children }: any) => {
   const theme = useMemo(
     () =>
       createTheme({
+        typography: {
+          fontFamily: "Tomorrow,Roboto,Poppins,sans-serif !important",
+          fontSize: 12,
+        },
         palette: {
           mode,
           primary: {
@@ -109,6 +113,7 @@ export function DarkMode() {
       <MaterialUISwitch
         id="appMode"
         sx={{ m: 0 }}
+        checked={colorMode.mode === "dark"}
         onClick={colorMode.toggleColorMode}
       />
     </CustomTooltip>

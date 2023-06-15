@@ -223,7 +223,7 @@ export function LoginScreen() {
                 style={{ textDecoration: "none", color: "#8a89fa" }}
                 href="https://code-labz-v2.vercel.app/"
               >
-                DevVersebz &nbsp;
+                DevVerse &nbsp;
               </Link>
               {new Date().getFullYear()}.
             </Typography>

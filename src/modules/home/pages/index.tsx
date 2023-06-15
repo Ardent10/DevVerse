@@ -1,3 +1,4 @@
+import { ColorModeContext } from "@/modules/common/DarkMode";
 import { AddPost } from "@/modules/common/Post/components";
 import { usePost } from "@/modules/common/Post/hooks";
 import { useAppState } from "@/store";
@@ -7,13 +8,14 @@ import { Avatar, Box, Grid, MenuItem, Typography } from "@mui/material";
 import { eventsArray, postData } from "@utils/SampleData/sampleData";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CreatePostModal } from "../components/createPostModal";
 import { CreateTags } from "../components/createTags";
 
 const HomeScreen: NextPage = () => {
   const [state] = useAppState();
   const [OpenCreatePostModal, setCreateCaseModalOpen] = useState(false);
+  const { mode } = useContext(ColorModeContext);
 
   const { getPosts } = usePost();
 
@@ -47,7 +49,7 @@ const HomeScreen: NextPage = () => {
       </BasicModal>
 
       <Layout>
-        <Grid container bgcolor="#f7f7f7" pt={10}>
+        <Grid container bgcolor={mode === "light" ? "#f7f7f7" : ""} pt={10}>
           <Grid item xs={2.5}>
             <ProfilePreview />
           </Grid>

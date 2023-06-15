@@ -34,7 +34,7 @@ interface props {
 
 export function BasicCard(props: props) {
   return (
-    <Grid container>
+    <Grid container id="basic-card">
       <Grid item xs={12} px={props.px} py={props.py}>
         <Card
           sx={{

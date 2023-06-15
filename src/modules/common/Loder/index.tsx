@@ -42,7 +42,7 @@ export function Loader() {
           overflow: "hidden",
         }}
       >
-        <img src="/DevVerse1.jpg" height={50} alt="DevVerse" />
+        <img src="/DevVerse-nobg.png" height={50} alt="DevVerse" />
         <Box
           width="100%"
           marginTop={1}

@@ -13,9 +13,10 @@ import { DarkMode } from "../../DarkMode";
 import { sxStyles } from "./index.styles";
 import ProfileMenu from "./profileMenu";
 
-https: interface props {
+interface props {
   open: any;
   handleOpenDrawer: any;
+  mode:string;
 }
 const drawerWidth = 240;
 
@@ -56,14 +57,18 @@ export default function Header(props: props) {
   });
 
   const styles = sxStyles();
-
+const iconColor = props.mode === "dark" ? "#FFF" : "#000";
   return (
-    <Box sx={styles.appBarBoxStyle}>
+    <Box
+      sx={styles.appBarBoxStyle}
+      >
       <AppBar
         id="header"
         position="fixed"
         open={props.open}
-        sx={styles.appBarStyle}
+        sx={{...styles.appBarStyle,
+          borderBottom:props.mode === "dark" ? "1px solid #8a89fa" : "#FFFE"
+        }}
       >
         <Toolbar sx={styles.toolBarStyle}>
           <Box display="flex" justifyContent="center" alignItems="center">
@@ -117,7 +122,7 @@ export default function Header(props: props) {
                 size="medium"
                 href="https://github.com/Ardent10/DevVerse"
               >
-                <GitHubIcon sx={{ color: "#000" }} fontSize="large" />
+                <GitHubIcon sx={{ color: iconColor }} fontSize="large" />
               </IconButton>
             </CustomTooltip>
 
