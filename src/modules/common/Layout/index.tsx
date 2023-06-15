@@ -1,26 +1,19 @@
 import { useAuth } from "@/modules/authentication/hooks";
 import { useAppState } from "@/store";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import HomeIcon from "@mui/icons-material/Home";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { Badge, Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useEffect,useContext } from "react";
+import { useContext, useEffect } from "react";
+import { ColorModeContext } from "../DarkMode";
 import { Loader } from "../Loder";
 import { CustomSnackbar } from "../Snackbar";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { ColorModeContext } from "../DarkMode";
 
 const drawerWidth = 240;
 
@@ -83,7 +76,7 @@ export function Layout(props: props) {
   const { globalReducer } = state;
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const {mode } = useContext(ColorModeContext);
+  const { mode } = useContext(ColorModeContext);
 
   const router = useRouter();
 
@@ -132,21 +125,26 @@ export function Layout(props: props) {
       />
       <Box sx={{ display: "flex" }}>
         <Header open={open} handleOpenDrawer={handleDrawerOpen} mode={mode} />
-        <Drawer
-          variant="permanent"
-          open={open}
-          sx={{
-            borderRight: mode === "dark" ? "1px solid #8a89fa" : "#FFFE",
-          }}
-        >
+        <Drawer id="main-drawer" variant="permanent" open={open}>
           <DrawerHeader
             id="Drawer-header"
             minHeight={10}
             display="flex"
-            justifyContent="space-between!important"
+            justifyContent="felx-end!important"
           >
-            Your Developer's Social
-            {/* <Image src="/sidebar.jpg" width={120} height={50} alt="devverse" /> */}
+            <img
+              src="/space.webp"
+              width={120}
+              height={100}
+              alt="devverse"
+              style={{
+                position: "absolute",
+                zIndex: 10,
+                top: "10px",
+                left: "80px",
+              }}
+            />
+            <Typography fontWeight={500}>Your Universe</Typography>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />

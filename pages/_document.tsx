@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@100;300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
-          <link rel="shortcut icon" href="/Dev.jpg" />
+          <link rel="shortcut icon" href="/favicon.ico" />
 
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
@@ -27,8 +27,8 @@ export default class MyDocument extends Document {
   }
 }
 
-// `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with static-site generation (SSG).
+// // `getInitialProps` belongs to `_document` (instead of `_app`),
+// // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //

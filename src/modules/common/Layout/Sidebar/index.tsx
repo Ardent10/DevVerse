@@ -1,5 +1,13 @@
 import { CustomTooltip } from "@common/Tooltip";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import HomeIcon from "@mui/icons-material/Home";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 import {
+  Badge,
   Divider,
   List,
   ListItem,
@@ -10,14 +18,6 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { sxStyles } from "./index.style";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import HomeIcon from "@mui/icons-material/Home";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { Badge } from "@mui/material";
 
 interface props {
   menuItems?: Array<any>;
@@ -29,7 +29,7 @@ export default function Sidebar(props: props) {
   const router = useRouter();
   const styles = sxStyles({ open: props.open });
 
-  const iconColor= props.mode==='dark'? '#FFF':""
+  const iconColor = props.mode === "dark" ? "#FFF" : "";
 
   const menuItems = [
     {
@@ -81,7 +81,15 @@ export default function Sidebar(props: props) {
   ];
 
   return (
-    <List sx={{ pt: 2 }}>
+    <List
+      id="sidebar-list"
+      sx={{
+        pt: 2,
+        height: "100%",
+        backgroundColor: props.mode === "dark" ? "#30303a" : "#FFF",
+        borderRight: props.mode === "dark" ? "1px solid #8a89fa" : "#FFFE",
+      }}
+    >
       {menuItems.map((item) => (
         <Link key={item.id} href={item.link} style={{ color: "#8a89fa" }}>
           <ListItem

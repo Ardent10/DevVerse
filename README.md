@@ -63,6 +63,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-- The DeVverse team would like to thank all contributors and users for their support and feedback.
+- The DevVerse team would like to thank all contributors and users for their support and feedback.
 
 Feel free to customize this README to fit your specific needs.

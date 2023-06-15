@@ -115,14 +115,7 @@ export function usePost() {
         });
       }
     } catch (error) {
-      dispatch({
-        type: "setToggleSnackbar",
-        payload: {
-          open: true,
-          severity: "error",
-          message: "Post Fetching Failed",
-        },
-      });
+     console.log("error", error);
     }
   };
 
