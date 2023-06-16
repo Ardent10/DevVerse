@@ -105,7 +105,7 @@ export const postData = [
 export const userProfilePreview = {
   name: "Zakariya Khan",
   avatar: "Images/boy.webp",
-  bgImg: "/Images/background.png",
+  bgImg: "/Images/bgImg.webp",
   bio: "• Aspiring GSoC mentee 2023 • KubeCon22' | • Top Contributor @OpenForce22 | • Open Source Enthusiast | HacktoberFest21'22' | • Ardent Learner & Writer",
   follower: 50,
   following: 20,
