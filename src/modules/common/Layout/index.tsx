@@ -108,7 +108,6 @@ export function Layout(props: props) {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  console.log(state);
   const handleDrawerClose = () => {
     setOpen(false);
   };

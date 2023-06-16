@@ -4,7 +4,7 @@ import { EditUserProfileSchema } from "@/utils/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserProfile } from "../../hooks";
 import { UploadImageTab } from "../EditProfile/Tabs/upload";
@@ -45,6 +45,7 @@ export function EditProfiletModal(props: props) {
     jobTitle: "",
     startJobDate: "",
     endJobDate: "",
+    university:"",
     degree: "",
     startDegreeDate: "",
     endDegreeDate: "",
@@ -64,6 +65,7 @@ export function EditProfiletModal(props: props) {
     jobTitle: "",
     startJobDate: "",
     endJobDate: "",
+    university:"",
     degree: "",
     startDegreeDate: "",
     endDegreeDate: "",
@@ -91,7 +93,7 @@ export function EditProfiletModal(props: props) {
     degree: props.userProfile?.degree || "",
     startDegreeDate: props.userProfile?.startDegreeDate || "",
     endDegreeDate: props.userProfile?.endDegreeDate || "",
-
+    university: props.userProfile?.university || "",
     userImage: [],
   };
 
@@ -106,35 +108,6 @@ export function EditProfiletModal(props: props) {
   } = useForm({
     defaultValues: defaultValues,
     resolver: yupResolver(EditUserProfileSchema),
-  });
-
-  const onSubmit = handleSubmit(async (data) => {
-    console.log("profile: ",data);
-    await updateUserProfile({
-      userId: state.userProfile.$id,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      bio: data.bio,
-      location: data.location,
-      email: data.email,
-      github: data.github,
-      portfolio: data.portfolio,
-      about: data.about,
-      skills: data.skills,
-
-      languages: data.languages,
-      company: data.company,
-      jobTitle: data.jobTitle,
-      startJobDate: data.startJobDate,
-      endJobDate: data.endJobDate,
-      degree: data.degree,
-      startDegreeDate: data.startDegreeDate,
-      endDegreeDate: data.endDegreeDate,
-      avatar: data.userImage[0],
-      bgImg: data.userImage[1],
-    });
-
-    props.closeEditProfileModal();
   });
 
   useEffect(() => {
@@ -168,6 +141,8 @@ export function EditProfiletModal(props: props) {
     let jobTitle = getValues("jobTitle");
     let startJobDate = getValues("startJobDate");
     let endJobDate = getValues("endJobDate");
+    let university = getValues("university");
+
     let degree = getValues("degree");
     let startDegreeDate = getValues("startDegreeDate");
     let endDegreeDate = getValues("endDegreeDate");
@@ -189,12 +164,44 @@ export function EditProfiletModal(props: props) {
       jobTitle,
       startJobDate,
       endJobDate,
+      university,
       degree,
       startDegreeDate,
       endDegreeDate,
     });
   }
+  const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
+    await updateUserProfile({
+      userId: state.userProfile.$id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      bio: data.bio,
+      location: data.location,
+      email: data.email,
+      github: data.github,
+      portfolio: data.portfolio,
 
+      about: data.about,
+      skills: data.skills,
+      languages: data.languages,
+
+      company: data.company,
+      jobTitle: data.jobTitle,
+      startJobDate: data.startJobDate,
+      endJobDate: data.endJobDate,
+      degree: data.degree,
+      startDegreeDate: data.startDegreeDate,
+      endDegreeDate: data.endDegreeDate,
+
+      avatar: data.userImage[0],
+      bgImg: data.userImage[1],
+    });
+
+    // props.closeEditProfileModal();
+  });
+
+  // console.log("Form Data", userData);
   const tabsArray: tab[] = [
     {
       id: 1,

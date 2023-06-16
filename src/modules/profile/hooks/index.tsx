@@ -40,14 +40,12 @@ export function useUserProfile() {
 
       let avatarId = "";
       let bgImgId = "";
-
       if (data.avatar) {
         const uploadAvatar = await storage.createFile(
           process.env.NEXT_PUBLIC_USERIMG_BUCKET_ID ?? "",
           ID.unique(),
           data.avatar
         );
-        console.log("Avatar", uploadAvatar);
         avatarId = uploadAvatar.$id;
       }
 
@@ -57,13 +55,12 @@ export function useUserProfile() {
           ID.unique(),
           data.bgImg
         );
-        console.log(uploadBgImg);
         bgImgId = uploadBgImg.$id;
       }
 
       const userRes = await database.updateDocument(
         process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
-        process.env.NEXT_PUBLIC_USERSPROFILE_COLLECTION_ID ?? "",
+        process.env.NEXT_PUBLIC_USERS_COLLECTION_ID ?? "",
         data.userId,
         {
           firstName: data.firstName,
@@ -81,6 +78,7 @@ export function useUserProfile() {
         process.env.NEXT_PUBLIC_USERSPROFILE_COLLECTION_ID ?? "",
         data.userId,
         {
+          userId: data.userId,
           skills: data.skills,
           languages: data.languages,
           company: data.company,
