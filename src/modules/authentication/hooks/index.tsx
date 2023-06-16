@@ -107,7 +107,7 @@ export function useAuth() {
           payload: {
             open: true,
             severity: "success",
-            message: `Welcome ${res.clientName} to DevVerse`,
+            message: `Welcome to DevVerse`,
           },
         });
         dispatch({
