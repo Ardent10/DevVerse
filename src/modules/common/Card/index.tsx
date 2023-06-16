@@ -13,7 +13,7 @@ import {
 import { PrimaryButton } from "../PrimaryButton";
 
 interface props {
-  height?: number;
+  height?: number | string;
   width?: number;
   cardItems?: Array<any>;
   children?: any;
