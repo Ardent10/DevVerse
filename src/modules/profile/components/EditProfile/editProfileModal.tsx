@@ -1,4 +1,3 @@
-import { usePost } from "@/modules/common/Post/hooks";
 import { GlobalTabs } from "@/modules/common/Tabs";
 import { useAppState } from "@/store";
 import { EditUserProfileSchema } from "@/utils/validations";
@@ -7,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useUserProfile } from "../../hooks";
 import { UploadImageTab } from "../EditProfile/Tabs/upload";
 import { About } from "./Tabs/about";
 import { Qualifications } from "./Tabs/qualifications";
@@ -29,7 +29,7 @@ interface props {
 export function EditProfiletModal(props: props) {
   const [currentTab, setCurrentTab] = useState(1);
   const [state, dispatch] = useAppState();
-  const { addPost } = usePost();
+  const { updateUserProfile } = useUserProfile();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,6 +38,16 @@ export function EditProfiletModal(props: props) {
     email: "",
     github: "",
     portfolio: "",
+    about: "",
+    skills: [],
+    languages: [],
+    company: "",
+    jobTitle: "",
+    startJobDate: "",
+    endJobDate: "",
+    degree: "",
+    startDegreeDate: "",
+    endDegreeDate: "",
   });
   const [userData, setUserDetails] = useState({
     firstName: "",
@@ -47,9 +57,20 @@ export function EditProfiletModal(props: props) {
     email: "",
     github: "",
     portfolio: "",
+    about: "",
+    skills: [],
+    languages: [],
+    company: "",
+    jobTitle: "",
+    startJobDate: "",
+    endJobDate: "",
+    degree: "",
+    startDegreeDate: "",
+    endDegreeDate: "",
   });
 
   const defaultValues = {
+    // User Details Tab
     firstName: props.userProfile?.firstName || "",
     lastName: props.userProfile?.lastName || "",
     bio: props.userProfile?.bio || "",
@@ -57,9 +78,21 @@ export function EditProfiletModal(props: props) {
     email: props.userProfile?.email || "",
     github: props.userProfile?.github || "",
     portfolio: props.userProfile?.portfolio || "",
+    // About Tab
     about: props.userProfile?.about || "",
     skills: props.userProfile?.skills || [],
     languages: props.userProfile?.languages || [],
+
+    // Qualifications Tab
+    company: props.userProfile?.company || "",
+    jobTitle: props.userProfile?.jobTitle || "",
+    startJobDate: props.userProfile?.startJobDate || "",
+    endJobDate: props.userProfile?.endJobDate || "",
+    degree: props.userProfile?.degree || "",
+    startDegreeDate: props.userProfile?.startDegreeDate || "",
+    endDegreeDate: props.userProfile?.endDegreeDate || "",
+
+    userImage: [],
   };
 
   const {
@@ -76,7 +109,31 @@ export function EditProfiletModal(props: props) {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    alert(JSON.stringify(data));
+    console.log("profile: ",data);
+    await updateUserProfile({
+      userId: state.userProfile.$id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      bio: data.bio,
+      location: data.location,
+      email: data.email,
+      github: data.github,
+      portfolio: data.portfolio,
+      about: data.about,
+      skills: data.skills,
+
+      languages: data.languages,
+      company: data.company,
+      jobTitle: data.jobTitle,
+      startJobDate: data.startJobDate,
+      endJobDate: data.endJobDate,
+      degree: data.degree,
+      startDegreeDate: data.startDegreeDate,
+      endDegreeDate: data.endDegreeDate,
+      avatar: data.userImage[0],
+      bgImg: data.userImage[1],
+    });
+
     props.closeEditProfileModal();
   });
 
@@ -107,6 +164,14 @@ export function EditProfiletModal(props: props) {
     let skills = getValues("skills");
     let languages = getValues("languages");
 
+    let company = getValues("company");
+    let jobTitle = getValues("jobTitle");
+    let startJobDate = getValues("startJobDate");
+    let endJobDate = getValues("endJobDate");
+    let degree = getValues("degree");
+    let startDegreeDate = getValues("startDegreeDate");
+    let endDegreeDate = getValues("endDegreeDate");
+
     setUserDetails({
       firstName,
       lastName,
@@ -115,6 +180,18 @@ export function EditProfiletModal(props: props) {
       email,
       github,
       portfolio,
+
+      about,
+      skills,
+      languages,
+
+      company,
+      jobTitle,
+      startJobDate,
+      endJobDate,
+      degree,
+      startDegreeDate,
+      endDegreeDate,
     });
   }
 

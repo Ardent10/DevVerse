@@ -27,7 +27,7 @@ export function useTag() {
       );
 
       if (res.$id) {
-        console.log("TAGS", res.documents);
+
         dispatch({
           type: "setToggleSnackbar",
           payload: {

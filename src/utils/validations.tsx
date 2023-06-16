@@ -56,9 +56,27 @@ const EditUserProfileSchema = yup.object().shape({
   location: yup.string().required(Messages.Location.required),
   github: yup.string().required(Messages.Github.required),
   portfolio: yup.string(),
+
   about: yup.string().required(Messages.About.required),
   skills: yup.array().required(Messages.Skills.required),
   languages: yup.array().required(Messages.Languages.required),
+
+  company: yup.string().required(Messages.Company.required),
+  jobTitle: yup.string().required(Messages.JobTitle.required),
+  startJobDate: yup.string().required(Messages.StartDate.required),
+  endJobDate: yup.string().required(Messages.EndDate.required),
+
+  university: yup.string().required(Messages.University.required),
+  degree: yup.string().required(Messages.Degree.required),
+  startDegreeDate: yup.string().required(Messages.StartDate.required),
+  endDegreeDate: yup.string().required(Messages.EndDate.required),
+
+  userImage: yup
+    .mixed()
+    .test("required", "You need to provide a file", (file) => {
+      if (file) return true;
+      return false;
+    }),
 });
 
 export {

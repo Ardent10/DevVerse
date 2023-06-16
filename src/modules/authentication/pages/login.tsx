@@ -44,7 +44,7 @@ export function LoginScreen() {
     await Login({ email: data.email, password: data.password });
   });
 
-  console.log(state);
+
 
   return (
     <>

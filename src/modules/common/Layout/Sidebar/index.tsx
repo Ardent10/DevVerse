@@ -1,11 +1,11 @@
 import { CustomTooltip } from "@common/Tooltip";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HomeIcon from "@mui/icons-material/Home";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
 import {
   Badge,
   Divider,
@@ -63,7 +63,7 @@ export default function Sidebar(props: props) {
     {
       id: 5,
       title: "Events",
-      icon: <WhatshotIcon sx={{ color: iconColor }} />,
+      icon: <CalendarMonthIcon sx={{ color: iconColor }} />,
       link: "/events",
     },
     {

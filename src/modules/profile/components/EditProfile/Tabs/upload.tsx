@@ -102,7 +102,7 @@ export function UploadImageTab({
 
   const handleUpload = () => {
     if (fileTaken.length !== 0) {
-      setValue("userImg", fileTaken);
+      setValue("userImage", fileTaken);
     } else {
       errorMsg = "Please select a file";
       return errorMsg;
@@ -141,7 +141,7 @@ export function UploadImageTab({
               <Grid item xs={12}>
                 <Dropzone
                   control={control}
-                  name="userImg"
+                  name="userImage"
                   setDragAndDropFiles={(files: any) => {
                     handleChange(files);
                   }}

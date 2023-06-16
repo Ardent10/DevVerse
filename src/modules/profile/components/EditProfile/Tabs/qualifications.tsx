@@ -107,36 +107,124 @@ export function Qualifications({
   userData,
   isDirty,
 }: props) {
-  console.log("userData", userData);
+
   return (
     <Grid container>
       <Grid item xs={12} sm={8} md={12}>
         <Box display="flex" flexDirection="column">
           <Divider />
-          <Grid item container spacing={2} px={2} pt={2} pb={3}>
-            <Grid item xs={12}>
-              <InputHeading label="About" required fontSize={16} />
-              <TextAreaInput name="about" minRows={8} control={control} />
+          <Grid item container rowSpacing={2} px={2} pt={2} pb={3}>
+            <Grid item container columnSpacing={2} xs={12}>
+              <Grid item xs={6}>
+                <Input
+                  name="company"
+                  control={control}
+                  type="text"
+                  placeholder="Experience*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="Company Name"
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  name="jobTitle"
+                  control={control}
+                  type="text"
+                  placeholder="Job Title*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="Job Title"
+                  required
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <ChipSelector
-                name="skills"
-                control={control}
-                data={tags}
-                label="Skills"
-                required
-                color="#8a89fa"
-              />
+            <Grid item container columnSpacing={2} xs={12}>
+              <Grid item xs={6}>
+                <Input
+                  name="startJobDate"
+                  control={control}
+                  type="date"
+                  placeholder="Experience*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="Start Date"
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  name="endJobDate"
+                  control={control}
+                  type="date"
+                  placeholder="Job Title*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="End Date"
+                  required
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <ChipSelector
-                name="languages"
-                control={control}
-                data={LanguageJson}
-                label="languages"
-                required
-                color="#8a89fa"
-              />
+            <Grid item container columnSpacing={2} xs={12}>
+              <Grid item xs={6}>
+                <Input
+                  name="university"
+                  control={control}
+                  type="text"
+                  placeholder="University*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="University"
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  name="degree"
+                  control={control}
+                  type="text"
+                  placeholder="Course*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="Course"
+                  required
+                />
+              </Grid>
+            </Grid>
+            <Grid item container columnSpacing={2} xs={12}>
+              <Grid item xs={6}>
+                <Input
+                  name="startDegreeDate"
+                  control={control}
+                  type="date"
+                  placeholder="Experience*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="Start Date"
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  name="endDegreeDate"
+                  control={control}
+                  type="date"
+                  placeholder="Job Title*"
+                  disable={false}
+                  inputHeadingType="Bold"
+                  inputHeadingLabelFontSize={14}
+                  inputHeadingLabel="End Date"
+                  required
+                />
+              </Grid>
             </Grid>
 
             <Grid

@@ -110,7 +110,7 @@ export const Profile = () => {
       });
     }
   });
-  console.log(userProfile);
+
   return (
     <>
       <BasicModal

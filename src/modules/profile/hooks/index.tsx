@@ -16,6 +16,15 @@ interface editUserProfileProps {
   github?: string;
   portfolio?: string;
 
+  languages: any;
+  company: string;
+  jobTitle: string;
+  startJobDate: string;
+  endJobDate: string;
+  degree: string;
+  startDegreeDate: string;
+  endDegreeDate: string;
+
   avatar?: any;
   bgImg?: any;
 }
@@ -38,7 +47,7 @@ export function useUserProfile() {
           ID.unique(),
           data.avatar
         );
-        console.log(uploadAvatar);
+        console.log("Avatar", uploadAvatar);
         avatarId = uploadAvatar.$id;
       }
 
@@ -52,25 +61,42 @@ export function useUserProfile() {
         bgImgId = uploadBgImg.$id;
       }
 
-      const res = await database.updateDocument(
+      const userRes = await database.updateDocument(
         process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
         process.env.NEXT_PUBLIC_USERSPROFILE_COLLECTION_ID ?? "",
         data.userId,
         {
           firstName: data.firstName,
           lastName: data.lastName,
+          location: data.location,
           bio: data.bio,
           about: data.about,
-          location: data.location,
           email: data.email,
           github: data.github,
           portfolio: data.portfolio,
+        }
+      );
+      const userProfileRes = await database.updateDocument(
+        process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
+        process.env.NEXT_PUBLIC_USERSPROFILE_COLLECTION_ID ?? "",
+        data.userId,
+        {
           skills: data.skills,
+          languages: data.languages,
+          company: data.company,
+          jobTitle: data.jobTitle,
+          startJobDate: data.startJobDate,
+          endJobDate: data.endJobDate,
+          degree: data.degree,
+          startDegreeDate: data.startDegreeDate,
+          endDegreeDate: data.endDegreeDate,
+
           avatarId: avatarId,
           bgImgId: bgImgId,
         }
       );
-      if (res.$id) {
+
+      if (userRes.$id || userProfileRes.$id) {
         dispatch({
           type: "setToggleSnackbar",
           payload: {
@@ -79,7 +105,7 @@ export function useUserProfile() {
             message: "User Profile Updated Successfully",
           },
         });
-        await getUserProfile();
+        // await getUserProfile();
       }
     } catch (error) {
       dispatch({
@@ -95,42 +121,54 @@ export function useUserProfile() {
 
   const getUserProfile = async () => {
     try {
-      const res = await database.listDocuments(
+      const userRes = await database.listDocuments(
+        process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
+        process.env.NEXT_PUBLIC_USERS_COLLECTION_ID ?? "",
+        [Query.equal("userId", state?.userProfile?.$id)]
+      );
+
+      const userProfile = await database.listDocuments(
         process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",
         process.env.NEXT_PUBLIC_USERSPROFILE_COLLECTION_ID ?? "",
         [Query.equal("userId", state?.userProfile?.$id)]
       );
-      if (res.documents) {
-        const user = res.documents;
 
-        // Fetch images from storage for each post
-        const userPersonalDetails = await Promise.all(
-          user.map(async (user: any) => {
-            const useImageIds = user.postImageIds;
-            const imageUrls = await Promise.all(
-              useImageIds.map((imageId: string) =>
-                storage.getFilePreview(
-                  process.env.NEXT_PUBLIC_USERIMG_BUCKET_ID ?? "",
-                  imageId
-                )
-              )
-            );
-            return {
-              id: user.$id,
-              skills: user.skills,
-              education: user.education,
-              experience: user.experience,
-              languages: user.languages,
-              imgUrl: imageUrls,
-            };
-          })
+      if (userRes.documents || userProfile.documents) {
+        const user = userProfile.documents[0]; // Fetching the first user profile
+
+        // Fetch avatar from storage for the user
+        const avatarImg = storage.getFilePreview(
+          process.env.NEXT_PUBLIC_USERIMG_BUCKET_ID ?? "",
+          user.avatarId
         );
+
+        const bgImg = storage.getFilePreview(
+          process.env.NEXT_PUBLIC_USERIMG_BUCKET_ID ?? "",
+          user.bgImgId
+        );
+
+        const userPersonalDetails = {
+          id: user.$id,
+          skills: user.skills,
+          education: user.education,
+          experience: user.experience,
+          languages: user.languages,
+          company: user.company,
+          jobTitle: user.jobTitle,
+          startJobDate: user.startJobDate,
+          endJobDate: user.endJobDate,
+          degree: user.degree,
+          startDegreeDate: user.startDegreeDate,
+          endDegreeDate: user.endDegreeDate,
+          avatarImg: avatarImg,
+          bgImgId: bgImg,
+        };
 
         dispatch({
           type: "setUserProfile",
           payload: {
             ...state.userProfile,
-            ...userPersonalDetails
+            ...userPersonalDetails,
           },
         });
       }

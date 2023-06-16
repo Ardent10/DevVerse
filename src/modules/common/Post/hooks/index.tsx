@@ -33,7 +33,6 @@ export function usePost() {
 
       const imageURLs = uploadImgResponses.map((response: any) => response.$id);
 
-      console.log("DATA=>", uploadImgResponses, imageURLs);
       if (imageURLs) {
         const res = await database.createDocument(
           process.env.NEXT_PUBLIC_APPWRITE_DB_ID ?? "",

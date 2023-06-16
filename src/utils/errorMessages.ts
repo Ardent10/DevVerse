@@ -117,4 +117,22 @@ export const Messages = {
   Languages: {
     required: "⚠ Languages are Required.",
   },
+  Company: {
+    required: "⚠ Company are Required.",
+  },
+  JobTitle: {
+    required: "⚠ Job Title are Required.",
+  },
+  StartDate: {
+    required: "⚠ Start Date are Required.",
+  },
+  EndDate: {
+    required: "⚠ Start Date are Required.",
+  },
+  University: {
+    required: "⚠ University are Required.",
+  },
+  Degree: {
+    required: "⚠ Degree are Required.",
+  },
 };

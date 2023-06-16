@@ -27,7 +27,7 @@ export function UserPersonalDetails({
   userData,
   isDirty,
 }: props) {
-  console.log("userData", userData);
+
   return (
     <Grid container>
       <Grid item xs={12} sm={8} md={12}>
