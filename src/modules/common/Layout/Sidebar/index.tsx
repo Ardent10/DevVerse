@@ -72,12 +72,6 @@ export default function Sidebar(props: props) {
       icon: <AccountCircleIcon sx={{ color: iconColor }} />,
       link: "/profile",
     },
-    {
-      id: 7,
-      title: "User Settings",
-      icon: <ManageAccountsIcon sx={{ color: iconColor }} />,
-      link: "/user-settings",
-    },
   ];
 
   return (
